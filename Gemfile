@@ -12,6 +12,7 @@ source 'http://rubygems.org' do
   gem 'bcrypt'
   gem 'tux'
   gem 'rack-flash3', :require => 'rack-flash'
+  gem 'learn-co'
 
   group :test do
     gem 'rspec'
