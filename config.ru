@@ -6,6 +6,8 @@ end
 
 use Rack::MethodOverride
 
+use UsersController
 use TribesController
+use TransactionsController
 
 run ApplicationController
