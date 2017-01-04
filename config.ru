@@ -9,5 +9,6 @@ use Rack::MethodOverride
 use UsersController
 use TribesController
 use TransactionsController
+use MessagesController
 
 run ApplicationController
