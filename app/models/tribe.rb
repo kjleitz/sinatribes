@@ -34,7 +34,8 @@ class Tribe < ActiveRecord::Base
     self.warriors >= amt ? self.update(warriors: self.warriors - amt) : false
   end
 
-  def add_resource(resource)
+  def collect_resource(resource)
     resource.update(tribe: self, gift: nil)
   end
+
 end
