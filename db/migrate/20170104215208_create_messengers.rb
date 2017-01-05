@@ -3,7 +3,7 @@ class CreateMessengers < ActiveRecord::Migration[5.0]
     create_table :messengers do |t|
       t.string :message
       t.boolean :rejected, default: false
-      t.integer :home_id
+      t.integer :tribe_id
       t.integer :destination_id
       t.timestamps
     end
