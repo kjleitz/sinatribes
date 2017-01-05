@@ -15,7 +15,7 @@ class Tribe < ActiveRecord::Base
     self.update(money: self.money + amt)
   end
 
-  def pay(amt)
+  def lose_money(amt)
     self.money >= amt ? self.update(money: self.money - amt) : false
   end
 
