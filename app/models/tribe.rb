@@ -25,4 +25,8 @@ class Tribe < ActiveRecord::Base
   def lose_warriors(amt)
     self.warriors >= amt ? self.update(warriors: self.warriors - amt) : false
   end
+
+  def add_resource(resource)
+    resource.update(tribe: self, gift: nil)
+  end
 end
