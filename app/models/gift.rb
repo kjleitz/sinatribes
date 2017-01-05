@@ -7,6 +7,10 @@ class Gift < ActiveRecord::Base
   end
 
   def accept
+    receiver = self.messenger.destination
+    receiver.add_money(self.money)
+    receiver.add_warriors(self.warriors)
+    receiver.add_resource(self.resource)
     self.update(accepted: true)
   end
 
