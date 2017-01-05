@@ -48,4 +48,14 @@ class Tribe < ActiveRecord::Base
     self.resources.create(name: resource_name)
   end
 
+  def lose_resource(resource_name)
+    if resource = self.resources.find_by(name: resource)
+      resource.destroy
+    end
+  end
+
+  def count_resource(resource_name)
+    self.resources.where(name: resource_name).count
+  end
+
 end
