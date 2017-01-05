@@ -10,4 +10,8 @@ class Tribe < ActiveRecord::Base
   has_many :buildings, through: :tribe_buildings
   has_many :tribe_resources
   has_many :resources, through: :tribe_resources
+
+  def pay(amt)
+    self.money >= amt ? self.update(money: self.money - amt) : false
+  end
 end
