@@ -34,10 +34,12 @@ class Tribe < ActiveRecord::Base
     self.warriors >= amt ? self.update(warriors: self.warriors - amt) : false
   end
 
+  # For adding existing resources to self
   def collect_resource(resource)
     resource.update(tribe: self, gift: nil)
   end
 
+  # For creating a new resource and adding it to self
   def add_resource(resource_name)
     self.resources.create(name: resource_name)
   end
