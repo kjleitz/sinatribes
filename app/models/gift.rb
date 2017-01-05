@@ -1,5 +1,5 @@
 class Gift < ActiveRecord::Base
-  belongs_to :resource
+  has_one :resource
   belongs_to :messenger
 
   def accepted?
@@ -18,10 +18,9 @@ class Gift < ActiveRecord::Base
     self.update(warriors: amt) if self.messenger.tribe.lose_warriors(amt)
   end
 
-  def add_resource(amt, resource_name)
-    if self.resource = self.messenger.tribe.resources.find_by(name: resource_name)
-      self.resource_amount = amt
-      self.save
+  def add_resource(resource_name)
+    if resource = self.messenger.tribe.resources.find_by(name: resource_name)
+      resource.update(tribe: nil, gift: self)
     end
   end
 end
