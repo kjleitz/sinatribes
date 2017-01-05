@@ -76,3 +76,31 @@ citizens = Tribe.create(
     priests: 1
   )
 )
+
+school = Building.create(
+  name: "school",
+  price: 300,
+  resource_amount: 1,
+  resource: "wood"
+)
+
+hospital = Building.create(
+  name: "hospital",
+  price: 900,
+  resource_amount: 3,
+  resource: "cloth"
+)
+
+barracks = Building.create(
+  name: "barracks",
+  price: 1500,
+  resource_amount: 3,
+  resource: "iron"
+)
+
+walls = Building.create(
+  name: "walls",
+  price: 500,
+  resource_amount: 4,
+  resource: "wood"
+)
