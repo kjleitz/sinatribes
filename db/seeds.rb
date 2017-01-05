@@ -1,25 +1,57 @@
-User.create(
-  username: "test",
-  email: "test@blah.com"
+test_1 = User.create(
+  username: "test_1",
+  email: "test@blah.com",
   password: "test"
 )
-User.create(
+billiam = User.create(
   username: "billiam",
-  email: "bill@bill.com"
+  email: "bill@bill.com",
   password: "password1"
 )
-User.create(
+sarah = User.create(
   username: "sarah",
-  email: "me@timsister.com"
+  email: "me@timsister.com",
   password: "weddingslol"
 )
-User.create(
+peabody = User.create(
   username: "peabody",
-  email: "smart@dog.com"
+  email: "smart@dog.com",
   password: "isapeople"
 )
-User.create(
+deadpool = User.create(
   username: "deadpool",
-  email: "jokes@you.com"
+  email: "jokes@you.com",
   password: "fourthwall"
+)
+
+queens = Tribe.create(
+  name: "The Queen's Personal Foot-Lickers",
+  user: test_1
+)
+cheeseburgers = Tribe.create(
+  name: "Cheeseburger Squishers",
+  user: peabody
+)
+scalpers = Tribe.create(
+  name: "Ticket Scalpers Anonymous",
+  money: 5000000,
+  user: peabody
+)
+nerds = Tribe.create(
+  name: "Aquarium Nerds",
+  technology: 100,
+  user: sarah
+)
+dwarves = Tribe.create(
+  name: "Six-Fingered Gay Dwarf Colony",
+  user: billiam
+)
+survivors = Tribe.create(
+  name: "Neverland Survivors",
+  user: deadpool
+)
+citizens = Tribe.create(
+  name: "Non-Pirate 'Pirate Island' Citizens",
+  land: 15,
+  user: sarah
 )
