@@ -4,7 +4,7 @@ class CreateBuildings < ActiveRecord::Migration[5.0]
       t.string :name
       t.integer :price
       t.integer :resource_amount
-      t.integer :resource_id
+      t.string :resource_name
     end
   end
 end
