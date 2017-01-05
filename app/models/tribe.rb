@@ -10,6 +10,10 @@ class Tribe < ActiveRecord::Base
   has_many :buildings, through: :tribe_buildings
   has_many :resources
 
+  validates_presence_of :user
+  validates_presence_of :name
+  validates_presence_of :religion
+
   def initialize(args)
     super
     self.update(
