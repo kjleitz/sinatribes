@@ -8,8 +8,7 @@ class Tribe < ActiveRecord::Base
   has_many :messengers
   has_many :tribe_buildings
   has_many :buildings, through: :tribe_buildings
-  has_many :tribe_resources
-  has_many :resources, through: :tribe_resources
+  has_many :resources
 
   def add_money(amt)
     self.update(money: self.money + amt)
