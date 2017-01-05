@@ -10,6 +10,14 @@ class Tribe < ActiveRecord::Base
   has_many :buildings, through: :tribe_buildings
   has_many :resources
 
+  def initialize(args)
+    super
+    self.update(
+      population: self.population || Population.create,
+      religion: self.religion || Religion.all.sample
+    )
+  end
+
   def add_money(amt)
     self.update(money: self.money + amt)
   end
