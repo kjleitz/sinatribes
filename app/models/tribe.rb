@@ -38,4 +38,8 @@ class Tribe < ActiveRecord::Base
     resource.update(tribe: self, gift: nil)
   end
 
+  def add_resource(resource_name)
+    self.resources.create(name: resource_name)
+  end
+
 end
