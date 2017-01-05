@@ -24,27 +24,42 @@ deadpool = User.create(
   password: "fourthwall"
 )
 
+christianity = Religion.create(
+name: "Christianity"
+)
+paganism = Religion.create(
+name: "Paganism"
+)
+satanism = Religion.create(
+name: "Satanism"
+)
+
 queens = Tribe.create(
   name: "The Queen's Personal Foot-Lickers",
-  user: test_1
+  user: test_1,
+  religion: satanism
 )
 cheeseburgers = Tribe.create(
   name: "Cheeseburger Squishers",
-  user: peabody
+  user: peabody,
+  religion: christianity
 )
 scalpers = Tribe.create(
   name: "Ticket Scalpers Anonymous",
   money: 5000000,
-  user: peabody
+  user: peabody,
+  religion: paganism
 )
 nerds = Tribe.create(
   name: "Aquarium Nerds",
   technology: 100,
-  user: sarah
+  user: sarah,
+  religion: paganism
 )
 dwarves = Tribe.create(
   name: "Six-Fingered Gay Dwarf Colony",
-  user: billiam
+  user: billiam,
+  religion: satanism
 )
 survivors = Tribe.create(
   name: "Neverland Survivors",
@@ -53,22 +68,11 @@ survivors = Tribe.create(
 citizens = Tribe.create(
   name: "Non-Pirate 'Pirate Island' Citizens",
   land: 15,
-  user: sarah
+  user: sarah,
+  religion: satanism,
+  population: Population.create(
+    warriors: 125,
+    farmers: 14,
+    priests: 1
+  )
 )
-
-christianity = Religion.create(
-  name: "Christianity"
-)
-paganism = Religion.create(
-  name: "Paganism"
-)
-satanism = Religion.create(
-  name: "Satanism"
-)
-queens.update(religion: satanism)
-cheeseburgers.update(religion: christianity)
-scalpers.update(religion: paganism)
-nerds.update(religion: paganism)
-dwarves.update(religion: satanism)
-survivors.update(religion: paganism)
-citizens.update(religion: satanism)
