@@ -22,7 +22,7 @@ class Gift < ActiveRecord::Base
     self.update(warriors: amt) if self.messenger.tribe.lose_warriors(amt)
   end
 
-  def add_resource(resource_name)
+  def attach_resource(resource_name)
     if resource = self.messenger.tribe.resources.find_by(name: resource_name)
       resource.update(tribe: nil, gift: self)
     end
