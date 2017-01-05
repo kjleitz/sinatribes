@@ -55,3 +55,20 @@ citizens = Tribe.create(
   land: 15,
   user: sarah
 )
+
+christianity = Religion.create(
+  name: "Christianity"
+)
+paganism = Religion.create(
+  name: "Paganism"
+)
+satanism = Religion.create(
+  name: "Satanism"
+)
+queens.update(religion: satanism)
+cheeseburgers.update(religion: christianity)
+scalpers.update(religion: paganism)
+nerds.update(religion: paganism)
+dwarves.update(religion: satanism)
+survivors.update(religion: paganism)
+citizens.update(religion: satanism)
