@@ -10,4 +10,8 @@ class Messenger < ActiveRecord::Base
   def reject
     self.update(rejected: true)
   end
+
+  def give_message(msg)
+    self.update(message: msg)
+  end
 end
