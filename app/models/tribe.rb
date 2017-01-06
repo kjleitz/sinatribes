@@ -19,6 +19,7 @@ class Tribe < ActiveRecord::Base
     self.update(
       population: self.population || Population.create,
       religion: self.religion || Religion.all.sample
+      last_tax_collection: self.last_tax_collection || self.created_at
     )
   end
 
