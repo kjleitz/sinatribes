@@ -39,6 +39,7 @@ class Tribe < ActiveRecord::Base
   def collect_taxes
     if (Time.now - self.last_tax_collection) > 300
       add_money(self.population.taxes)
+      self.update(last_tax_collection: Time.now)
     end
   end
 
