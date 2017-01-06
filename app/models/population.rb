@@ -11,10 +11,10 @@ class Population < ActiveRecord::Base
 
   def happiness
     happy_val = 0
+    happy_val -= self.farmers if density > 50
     happy_val += self.tribe.buildings.count
     happy_val += self.priests
     happy_val += (self.warriors / 2)
-    happy_val -= self.farmers if density > 50
   end
 
 end
