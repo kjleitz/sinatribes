@@ -8,5 +8,6 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "after all these implements and texts designed by intellects"
     use Rack::Flash
+    set(:logged_in) { |bool| condition { logged_in? == bool } }
   end
 end
