@@ -112,4 +112,11 @@ hut = Building.create(
   resource_name: "food"
 )
 
+town_hall = Building.create(
+  name: "town hall",
+  price: 2000,
+  resource_amount: 3,
+  resource_name: "stone"
+)
+
 survivors.build_building("hut")
