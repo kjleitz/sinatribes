@@ -17,4 +17,8 @@ class Population < ActiveRecord::Base
     happy_val += (self.warriors / 2)
   end
 
+  def taxes
+    self.farmers * self.tribe.count_building("town hall") * (1 + self.tribe.buildings.count * 0.25)
+  end
+
 end
