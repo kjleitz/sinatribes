@@ -14,11 +14,16 @@ class Population < ActiveRecord::Base
     happy_val -= self.farmers if density > 50
     happy_val += self.tribe.buildings.count
     happy_val += self.priests
-    happy_val += (self.warriors / 2)
+    happy_val += (self.warriors * 0.5)
+    happy_val.to_i
   end
 
   def taxes
-    self.farmers * self.tribe.count_building("town hall") * (1 + self.tribe.buildings.count * 0.25)
+    tax_val = self.farmers * (1 + self.tribe.count_building("town hall"))
+    tax_val *= (1 + self.tribe.buildings.count * 0.25)
+    tax_val += self.happiness
+    tax_val *= self.tribe.technology
+    tax_val.to_i
   end
 
 end
