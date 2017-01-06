@@ -148,7 +148,7 @@ class Tribe < ActiveRecord::Base
 
   def count_building(building_name, reload_object=false)
     self.reload if reload_object
-    self.buildings.where(building_id: building.id).count
+    self.buildings.where(name: building_name).count
   end
 
 end
