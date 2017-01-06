@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     erb :layout, :"../layout"
   end
 
+  get "/signup" do
+    erb :signup
+  end
+
   get "/login" do
     erb :login
   end
