@@ -66,6 +66,9 @@ class Tribe < ActiveRecord::Base
     self.resources.where(name: resource_name).count
   end
 
+  # # The following two methods assume tribes can only build one of each type
+  # # of building. I think this functionality makes sense, to some extent.
+  #
   # def build_building(building_name)
   #   if building = Building.find_by(name: building_name)
   #     if building.price <= self.money &&
@@ -84,6 +87,31 @@ class Tribe < ActiveRecord::Base
   #   end
   # end
 
+  # The following three methods assume tribes can build more than one building
+  # of a single type. A count of their buildings would be obtained by checking
+  # the tribe_buildings table for multiple associations between the tribe and
+  # the associated building. The reason I went with this method of multiple-
+  # same-object-association (That's not a term, Keegan. Yeah, I know, Keegan.)
+  # instead of the model I have with resources (being that each resource is like
+  # a commodity, e.g. there are a finite and 'real' number of pieces of iron,
+  # they can be created, traded, or destroyed. Not just the references to them,
+  # but the records/objects themselves) is that a resource just has a name,
+  # and is a very simple record, whereas a building is meant to be more complex,
+  # with a multi-variable cost, and extra attributes planned for the future. So,
+  # I think it makes more sense to store multiple records of the association a
+  # tribe has to the building type, rather than store multiple records of the
+  # building type for every building the tribe builds. By storing multiple
+  # identical records in the "join table"-esque tribe_buildings table, each
+  # tribe_building has an id, and is itself only a three-column record of only
+  # integers, which is a lot less data than storing a new building every time.
+  # The other main difference is that a building is not meant to be transferred
+  # between two tribes. It may be destroyed in raids, or maybe dismantled for
+  # parts, but it's an immovable object that has a "type".
+  # Although, one of the reasons I DISLIKE this way of doing things is that
+  # when I want to count each building type in a tribe, I have to make two
+  # database queries: one to get the building id from the name, and a second
+  # to actually count the tribe_building records in tribe_buildings.
+
   def build_building(building_name)
     if building = Building.find_by(name: building_name)
       if building.price <= self.money &&
@@ -98,6 +126,12 @@ class Tribe < ActiveRecord::Base
   def add_building(building_name)
     if building = Building.find_by(name: building_name)
       self.tribe_buildings.create(building: building)
+    end
+  end
+
+  def count_building(building_name)
+    if building = self.buildings.find_by(name: building_name)
+      self.tribe_buildings.where(building_id: building.id).count
     end
   end
 
