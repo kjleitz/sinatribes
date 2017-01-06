@@ -2,9 +2,6 @@ class Tribe < ActiveRecord::Base
   belongs_to :user
   belongs_to :religion
   has_one :population
-  has_one :warriors, through: :population
-  has_one :farmers, through: :population
-  has_one :priests, through: :population
   has_many :messengers
   has_many :tribe_buildings
   has_many :buildings, through: :tribe_buildings
@@ -22,6 +19,18 @@ class Tribe < ActiveRecord::Base
       population: self.population || Population.create,
       religion: self.religion || Religion.all.sample
     )
+  end
+
+  def warriors
+    self.population.warriors
+  end
+
+  def farmers
+    self.population.farmers
+  end
+
+  def priests
+    self.population.priests
   end
 
   def initialize_tax_time
@@ -44,11 +53,11 @@ class Tribe < ActiveRecord::Base
   end
 
   def add_warriors(amt)
-    self.update(warriors: self.warriors + amt)
+    self.population.update(warriors: self.warriors + amt)
   end
 
   def lose_warriors(amt)
-    self.warriors >= amt ? self.update(warriors: self.warriors - amt) : false
+    self.warriors >= amt ? self.population.update(warriors: self.warriors - amt) : false
   end
 
   def add_land(amt)
