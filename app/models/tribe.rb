@@ -21,6 +21,10 @@ class Tribe < ActiveRecord::Base
     )
   end
 
+  def initialize_tax_time
+    self.update(last_tax_collection: self.last_tax_collection || self.created_at)
+  end
+
   def warriors
     self.population.warriors
   end
@@ -35,10 +39,6 @@ class Tribe < ActiveRecord::Base
 
   def happiness
     self.population.happiness
-  end
-
-  def initialize_tax_time
-    self.update(last_tax_collection: self.last_tax_collection || self.created_at)
   end
 
   def add_money(amt)
