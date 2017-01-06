@@ -14,13 +14,18 @@ class Tribe < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :religion
 
+  after_create :initialize_tax_time
+
   def initialize(args)
     super
     self.update(
       population: self.population || Population.create,
-      religion: self.religion || Religion.all.sample,
-      last_tax_collection: self.last_tax_collection || self.created_at
+      religion: self.religion || Religion.all.sample
     )
+  end
+
+  def initialize_tax_time
+    self.update(last_tax_collection: self.last_tax_collection || self.created_at)
   end
 
   def add_money(amt)
