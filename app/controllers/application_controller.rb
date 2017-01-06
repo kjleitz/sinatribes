@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
     set(:logged_in) { |bool| condition { logged_in? == bool } }
   end
 
-  get "/" logged_in: false do
+  get "/", logged_in: false do
     erb :index
   end
 
