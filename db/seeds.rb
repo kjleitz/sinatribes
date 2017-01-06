@@ -104,3 +104,12 @@ walls = Building.create(
   resource_amount: 4,
   resource_name: "wood"
 )
+
+hut = Building.create(
+  name: "hut",
+  price: 100,
+  resource_amount: 0,
+  resource_name: "food"
+)
+
+survivors.build_building("hut")
