@@ -66,11 +66,28 @@ class Tribe < ActiveRecord::Base
     self.resources.where(name: resource_name).count
   end
 
+  # def build_building(building_name)
+  #   if building = Building.find_by(name: building_name)
+  #     if building.price <= self.money &&
+  #        building.resource_amount <= count_resource(building.resource_name) &&
+  #        !self.buildings.include?(building)
+  #       lose_money(building.price)
+  #       building.resource_amount.times { lose_resource(building.resource_name) }
+  #       self.tribe_buildings.create(building: building)
+  #     end
+  #   end
+  # end
+  #
+  # def add_building(building_name)
+  #   if building = Building.find_by(name: building_name)
+  #     self.tribe_buildings.find_or_create_by(building: building)
+  #   end
+  # end
+
   def build_building(building_name)
     if building = Building.find_by(name: building_name)
       if building.price <= self.money &&
-         building.resource_amount <= count_resource(building.resource_name) &&
-         !self.buildings.include?(building)
+         building.resource_amount <= count_resource(building.resource_name)
         lose_money(building.price)
         building.resource_amount.times { lose_resource(building.resource_name) }
         self.tribe_buildings.create(building: building)
@@ -80,7 +97,7 @@ class Tribe < ActiveRecord::Base
 
   def add_building(building_name)
     if building = Building.find_by(name: building_name)
-      self.tribe_buildings.find_or_create_by(building: building)
+      self.tribe_buildings.create(building: building)
     end
   end
 
