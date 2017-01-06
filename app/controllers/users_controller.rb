@@ -39,6 +39,11 @@ class UsersController < ApplicationController
 
   end
 
+  get "/logout" do
+    session.clear
+    redirect to("/")
+  end
+
   get /\A\/.+/, logged_in: false do
     redirect to("/login")
   end
