@@ -111,22 +111,26 @@ class Tribe < ActiveRecord::Base
   # to actually count the tribe_building records in tribe_buildings.
   # You also need to reload the tribe object if you want to access the tribe's
   # buildings after adding one, since it is manually adding records to the child
-  # table.
+  # table. If you use the reload_object optional argument on #build_building or
+  # #add_building, you can force a reload of the object afterward (but only if
+  # the building was successfully added).
 
-  def build_building(building_name)
+  def build_building(building_name, reload_object=false)
     if building = Building.find_by(name: building_name)
       if building.price <= self.money &&
          building.resource_amount <= count_resource(building.resource_name)
         lose_money(building.price)
         building.resource_amount.times { lose_resource(building.resource_name) }
         self.tribe_buildings.create(building: building)
+        self.reload if reload_object
       end
     end
   end
 
-  def add_building(building_name)
+  def add_building(building_name, reload_object=false)
     if building = Building.find_by(name: building_name)
       self.tribe_buildings.create(building: building)
+      self.reload if reload_object
     end
   end
 
