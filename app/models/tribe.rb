@@ -176,4 +176,9 @@ class Tribe < ActiveRecord::Base
     def_val.to_i
   end
 
+  def attack
+    atk_val = strength * (1 + count_building("barracks") * 0.5) * (1 + count_building("town hall") * 0.5)
+    atk_val.to_i
+  end
+
 end
