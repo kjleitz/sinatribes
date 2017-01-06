@@ -1,4 +1,7 @@
 class ApplicationController < Sinatra::Base
+
+  include Helper
+
   configure do
     set :public_folder, "public"
     set :views, "app/views"
