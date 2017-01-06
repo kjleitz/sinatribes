@@ -1,13 +1,12 @@
 class UsersController < ApplicationController
 
-  configure do
-    set :views, "app/views/users"
-    erb :layout, :"../layout"
+  get "/", logged_in: true do
+    erb :"users/index"
   end
 
   get "/signup" do
     redirect to("/user/#{current_user.username}") if logged_in?
-    erb :signup
+    erb :"users/signup"
   end
 
   post "/signup" do
@@ -16,7 +15,7 @@ class UsersController < ApplicationController
 
   get "/login" do
     redirect to("/user/#{current_user.username}") if logged_in?
-    erb :login
+    erb :"users/login"
   end
 
   post "/login" do
@@ -25,10 +24,6 @@ class UsersController < ApplicationController
 
   get /\A\/.+/, logged_in: false do
     redirect to("/login")
-  end
-
-  get "/" do
-    erb :index
   end
 
 end
