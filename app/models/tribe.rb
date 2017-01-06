@@ -31,6 +31,12 @@ class Tribe < ActiveRecord::Base
     self.money >= amt ? self.update(money: self.money - amt) : false
   end
 
+  def collect_taxes
+    if (Time.now - self.last_tax_collection) > 300
+      add_money(self.population.taxes)
+    end
+  end
+
   def add_warriors(amt)
     self.update(warriors: self.warriors + amt)
   end
