@@ -38,6 +38,14 @@ class Tribe < ActiveRecord::Base
     self.warriors >= amt ? self.update(warriors: self.warriors - amt) : false
   end
 
+  def add_land(amt)
+    self.update(land: self.land + amt)
+  end
+
+  def lose_land(amt)
+    self.land >= amt ? self.update(land: self.land - amt) : false
+  end
+
   # For adding existing resources to self
   def collect_resource(resource)
     resource.update(tribe: self, gift: nil)
