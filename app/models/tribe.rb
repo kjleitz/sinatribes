@@ -88,9 +88,7 @@ class Tribe < ActiveRecord::Base
   # end
 
   # The following three methods assume tribes can build more than one building
-  # of a single type. A count of their buildings would be obtained by checking
-  # the tribe_buildings table for multiple associations between the tribe and
-  # the associated building. The reason I went with this method of multiple-
+  # of a single type. The reason I went with this method of multiple-
   # same-object-association (That's not a term, Keegan. Yeah, I know, Keegan.)
   # instead of the model I have with resources (being that each resource is like
   # a commodity, e.g. there are a finite and 'real' number of pieces of iron,
@@ -111,6 +109,9 @@ class Tribe < ActiveRecord::Base
   # when I want to count each building type in a tribe, I have to make two
   # database queries: one to get the building id from the name, and a second
   # to actually count the tribe_building records in tribe_buildings.
+  # You also need to reload the tribe object if you want to access the tribe's
+  # buildings after adding one, since it is manually adding records to the child
+  # table.
 
   def build_building(building_name)
     if building = Building.find_by(name: building_name)
