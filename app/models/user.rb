@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password
 
   def self.validate_username(username)
-    username.match(/\w{1,80}/)
+    username.match(/\A\w{1,80}\z/)
   end
 
   def self.validate_email(email)
