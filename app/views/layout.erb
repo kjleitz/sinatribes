@@ -8,7 +8,7 @@
 </head>
 <body>
   <% if flash.has?(:message) %>
-    <div class="flash"><%= flash[:message] %><div>
+    <div class="flash"><%= flash[:message] %></div>
   <% end %>
 
   <%= yield %>
