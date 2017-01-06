@@ -131,9 +131,7 @@ class Tribe < ActiveRecord::Base
   end
 
   def count_building(building_name)
-    if building = self.buildings.find_by(name: building_name)
-      self.tribe_buildings.where(building_id: building.id).count
-    end
+    self.buildings.where(building_id: building.id).count
   end
 
 end
