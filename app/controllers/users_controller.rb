@@ -27,4 +27,8 @@ class UsersController < ApplicationController
     redirect to("/login")
   end
 
+  get "/" do
+    erb :index
+  end
+
 end
