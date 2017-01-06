@@ -10,4 +10,9 @@ class ApplicationController < Sinatra::Base
     use Rack::Flash
     set(:logged_in) { |bool| condition { logged_in? == bool } }
   end
+
+  get "/" do
+    erb :index
+  end
+  
 end
