@@ -48,9 +48,9 @@ class TribesController < ApplicationController
   patch "/tribes/:slug/taxes" do |slug|
     if @tribe = current_user.tribes.find_by_slug(slug)
       if @tribe.collect_taxes
-        flash[:message] = "Successfully collected $#{tribe.population.taxes}!"
+        flash[:message] = "Successfully collected $#{@tribe.population.taxes}!"
       else
-        tax_time = Time.now - @tribe.last_tax_collection
+        tax_time = Tribe::TAX_WAIT_PERIOD - (Time.now - @tribe.last_tax_collection)
         flash[:message] = "You need to wait #{tax_time.to_i} seconds until you can collect taxes again."
       end
     else
