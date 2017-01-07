@@ -1,4 +1,4 @@
-class TribesController < Sinatra::Base
+class TribesController < ApplicationController
 
   get "/tribes" do
     @tribes = Tribe.all
