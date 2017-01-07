@@ -18,8 +18,17 @@
       <% @user.tribes.each do |tribe| %>
         <tr>
           <td><%= tribe.name %></td>
-          <td><a href="/tribes/<%= tribe.slug %>/manage">manage</a></td>
-          <td><a href="/tribes/<%= tribe.slug %>/messengers">messengers</a></td>
+          <td><a href="/tribes/<%= tribe.slug %>/manage">Manage</a></td>
+          <td><a href="/tribes/<%= tribe.slug %>/messengers">Messengers</a></td>
+          <td>
+            <% if @user.tribe == tribe %>
+              <strong>(active tribe)</strong>
+            <% else %>
+              <form action="/tribes/<%= tribe.slug %>/activate" method="post">
+                <input type="submit" value="Make active tribe">
+              </form>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
