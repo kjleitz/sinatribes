@@ -9,7 +9,7 @@ module Slugifiable
   end
 
   module ClassMethods
-    def self.find_by_slug(slug, attribute=:name)
+    def find_by_slug(slug, attribute=:name)
       self.all.find { |e| e.slug(attribute) == slug }
     end
   end
