@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   get "/", logged_in: true do
+    @user = current_user
     erb :"users/index"
   end
 
