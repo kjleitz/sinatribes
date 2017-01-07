@@ -18,6 +18,8 @@ class Tribe < ActiveRecord::Base
   after_create :initialize_tax_time
   after_create :make_active_tribe
 
+  TAX_WAIT_PERIOD = 300
+
   def initialize(args)
     super
     self.update(
@@ -59,7 +61,7 @@ class Tribe < ActiveRecord::Base
   end
 
   def collect_taxes
-    if (Time.now - self.last_tax_collection) > 300
+    if (Time.now - self.last_tax_collection) > TAX_WAIT_PERIOD
       add_money(self.population.taxes)
       self.update(last_tax_collection: Time.now)
     end
