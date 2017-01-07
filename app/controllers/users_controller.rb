@@ -36,7 +36,14 @@ class UsersController < ApplicationController
   end
 
   post "/login" do
-
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      flash[:message] = "Logged in successfully!"
+      redirect to("/")
+    else
+      flash[:message] = "Incorrect username and/or password. Please try again."
+      redirect to("/login")
+    end
   end
 
   get "/logout" do
