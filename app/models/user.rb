@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
     email.match(/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
   end
 
+  def switch_active_tribe_to(tribe)
+    self.update(tribe: tribe) if self.tribes.include?(tribe)
+  end
+
 end
