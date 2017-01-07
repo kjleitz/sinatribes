@@ -6,8 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>God</th>
-      <th>Diplomacy</th>
+      <th>Owner</th>
     </tr>
   </thead>
   <tfoot>
@@ -18,7 +17,6 @@
         </form>
       </td>
       <td></td>
-      <td></td>
     </tr>
   </tfoot>
   <tbody>
@@ -26,7 +24,6 @@
       <tr>
         <td><a href="/tribes/<%= tribe.slug %>"><%= tribe.name %></a></td>
         <td><a href="/users/<%= tribe.user.username %>"><%= tribe.user.username %></a></td>
-        <td><a href="/tribes/<%= tribe.slug %>/messengers">Run a messenger</a></td>
       </tr>
     <% end %>
   </tbody>
