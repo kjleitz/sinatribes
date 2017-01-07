@@ -57,8 +57,8 @@ class UsersController < ApplicationController
     redirect to("/login")
   end
 
-  get "/users/:username" do
-    @user = User.find_by(username: params[:username])
+  get "/users/:username" do |username|
+    @user = User.find_by(username: username)
     erb :"users/show"
   end
 
