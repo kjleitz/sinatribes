@@ -21,6 +21,15 @@ class TribesController < ApplicationController
     end
   end
 
+  patch "/tribes/:slug/activate" do |slug|
+    if @tribe = current_user.tribes.find_by_slug(slug)
+      @tribe.make_active_tribe || flash[:message] = "Something went wrong. Please try again!"
+    else
+      flash[:message] = "This is not your tribe to activate!"
+    end
+    redirect to("/")
+  end
+
   get "/tribes/:slug/manage" do |slug|
     @buildings = Building.all
     @land_price = Tribe::LAND_PRICE
@@ -58,15 +67,6 @@ class TribesController < ApplicationController
       flash[:message] = "This is not your tribe to collect taxes for!"
     end
     redirect to("/tribes/#{slug}/manage")
-  end
-
-  patch "/tribes/:slug/activate" do |slug|
-    if @tribe = current_user.tribes.find_by_slug(slug)
-      @tribe.make_active_tribe || flash[:message] = "Something went wrong. Please try again!"
-    else
-      flash[:message] = "This is not your tribe to activate!"
-    end
-    redirect to("/")
   end
 
   patch "/tribes/:slug/land" do |slug|
