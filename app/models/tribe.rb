@@ -150,27 +150,24 @@ class Tribe < ActiveRecord::Base
   # #add_building, you can force a reload of the object afterward (but only if
   # the building was successfully added).
 
-  def build_building(building_name, reload_object=false)
+  def build_building(building_name)
     if building = Building.find_by(name: building_name)
       if building.price <= self.money &&
          building.resource_amount <= count_resource(building.resource_name)
         lose_money(building.price)
         building.resource_amount.times { lose_resource(building.resource_name) }
         self.tribe_buildings.create(building: building)
-        self.reload if reload_object
       end
     end
   end
 
-  def add_building(building_name, reload_object=false)
+  def add_building(building_name)
     if building = Building.find_by(name: building_name)
       self.tribe_buildings.create(building: building)
-      self.reload if reload_object
     end
   end
 
-  def count_building(building_name, reload_object=false)
-    self.reload if reload_object
+  def count_building(building_name)
     self.buildings.where(name: building_name).count
   end
 
