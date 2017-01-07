@@ -24,7 +24,7 @@
             <% if @user.tribe == tribe %>
               <strong>(active tribe)</strong>
             <% else %>
-              <form action="/tribes/<%= tribe.slug %>/activate" method="patch">
+              <form action="/tribes/<%= tribe.slug %>/activate" method="post">
                 <input type="hidden" name="_method" value="patch">
                 <input type="submit" value="Make active tribe">
               </form>
