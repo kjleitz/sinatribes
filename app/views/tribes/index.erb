@@ -1,0 +1,33 @@
+<h1>The Tribes of SinaTribes</h1>
+
+<h2>There are currently <%= @tribes.count %> tribes in the world:</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>God</th>
+      <th>Diplomacy</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td>
+        <form action="/tribes/new" method="post">
+          <input type="submit" value="new tribe">
+        </form>
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <% @tribes.each do |tribe| %>
+      <tr>
+        <td><a href="/tribes/<%= tribe.slug %>"><%= tribe.name %></a></td>
+        <td><a href="/users/<%= tribe.user.username %>"><%= tribe.user.username %></a></td>
+        <td><a href="/tribes/<%= tribe.slug %>/messengers">Run a messenger</a></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
