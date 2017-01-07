@@ -71,7 +71,12 @@ class TribesController < ApplicationController
 
   patch "/tribes/:slug/land" do |slug|
     if @tribe = current_user.tribes.find_by_slug(slug)
-      @tribe.buy_land(params[:amount]) || flash[:message] = "You cannot afford that amount of land."
+      amt = params[:amount].to_i
+      if @tribe.buy_land(amt.to_i)
+        flash[:message] = "Successfully purchased #{amt} square mile#{"s" if amt > 1} of land!"
+      else
+        flash[:message] = "You cannot afford that amount of land."
+      end
     else
       flash[:message] = "This is not your tribe to buy land for!"
     end
