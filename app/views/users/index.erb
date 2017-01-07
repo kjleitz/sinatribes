@@ -4,14 +4,9 @@
 <% if @user.tribes %>
   <table>
     <tcaption>Your tribes:</tcaption>
-    <thead>
-      <tr>
-        <th>Tribe</th>
-        <th></th>
-      </tr>
-    </thead>
     <tfoot>
       <tr>
+        <td></td>
         <td>
           <form action="/tribes/new" method="get">
             <input type="submit" value="new tribe">
@@ -24,7 +19,8 @@
       <% @user.tribes.each do |tribe| %>
         <tr>
           <td><%= tribe.name %></td>
-          <td><a href="/users/<%= @user.username %>/tribes/<%= tribe.slug %>/messengers">messengers</a></td>
+          <td><a href="/tribes/<%= tribe.slug %>/manage">manage</a></td>
+          <td><a href="/tribes/<%= tribe.slug %>/messengers">messengers</a></td>
         </tr>
       <% end %>
     </tbody>
