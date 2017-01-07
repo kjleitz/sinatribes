@@ -19,6 +19,7 @@ class Tribe < ActiveRecord::Base
   after_create :make_active_tribe
 
   TAX_WAIT_PERIOD = 300
+  LAND_PRICE = 100
 
   def initialize(args)
     super
@@ -73,6 +74,10 @@ class Tribe < ActiveRecord::Base
 
   def lose_warriors(amt)
     self.warriors >= amt ? self.population.update(warriors: self.warriors - amt) : false
+  end
+
+  def buy_land(amt)
+    add_land(amt) if lose_money(amt * LAND_PRICE)
   end
 
   def add_land(amt)
