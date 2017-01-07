@@ -20,12 +20,12 @@
   <tcaption>Moolah</tcaption>
   <tr>
     <td>Tribe net worth:</td>
-    <td><%= @tribe.money %></td>
+    <td>$<%= @tribe.money %></td>
     <td></td>
   </tr>
   <tr>
-    <td>Taxes to collect:</td>
-    <td><%= @tribe.population.taxes %></td>
+    <td>Collectible taxes:</td>
+    <td>$<%= @tribe.population.taxes %></td>
     <td>
       <form action="/tribes/<%= @tribe.slug %>/taxes" method="post">
         <input type="hidden" name="_method" value="patch">
