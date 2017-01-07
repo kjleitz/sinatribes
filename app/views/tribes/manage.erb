@@ -74,7 +74,7 @@
         <td><em>You have no buildings.</em></td>
       </tr>
     <% else %>
-      <% @tribe.buildings.each do |building| %>
+      <% @tribe.buildings.uniq.each do |building| %>
         <tr>
           <td><%= @tribe.count_building(building.name) %></td>
           <td><%= building.name %></td>
