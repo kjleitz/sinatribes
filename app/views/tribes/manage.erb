@@ -5,10 +5,19 @@
   <tr>
     <td>Name:</td>
     <td><%= @tribe.name %></td>
+    <td></td>
   </tr>
   <tr>
     <td>Land:</td>
     <td><%= @tribe.land %> square mile<%= "s" if @tribe.land > 1 %></td>
+    <td>
+      <form action="/tribes/<%= @tribe.slug %>/land" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <input type="number" name="amount">
+        <input type="submit" value="Buy">
+        ($100/mi<sup>2</sup>)
+      </form>
+    </td>
   </tr>
   <tr>
     <td>Technology:</td>
