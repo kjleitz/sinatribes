@@ -23,6 +23,7 @@ class TribesController < ApplicationController
 
   get "/tribes/:slug/manage" do |slug|
     @buildings = Building.all
+    @land_price = Tribe::LAND_PRICE
     if @tribe = current_user.tribes.find_by_slug(slug)
       erb :"tribes/manage"
     else
