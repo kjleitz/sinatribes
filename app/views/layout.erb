@@ -4,13 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,900">
   <title>SinaTribes: a tribe-building simulation game!</title>
 </head>
 <body>
-  <% if flash.has?(:message) %>
+  <header class="top_bar">
+    <div id="logo"><a href="/">SinaTribes</a></div>
+    <nav id="main_nav">
+      <% if session[:user_id] %>
+        <a href="/">home</a>
+        <a href="/logout">log out</a>
+      <% else %>
+        <a href="/signup">sign up</a>
+        <a href="/login">log in</a>
+      <% end %>
+    </nav>
+  </header>
+  <main>
+    <% if flash.has?(:message) %>
     <div class="flash"><%= flash[:message] %></div>
-  <% end %>
+    <% end %>
 
-  <%= yield %>
+    <%= yield %>
+  </main>
 </body>
 </html>
