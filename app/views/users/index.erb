@@ -1,1 +1,34 @@
-<h1>this is the users index</h1>
+<h1>Welcome home, <%= @user.username %>.</h1>
+
+
+<% if @user.tribes %>
+  <table>
+    <tcaption>Your tribes:</tcaption>
+    <thead>
+      <tr>
+        <th>Tribe</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td>
+          <form action="/tribes/new" method="get">
+            <input type="sumbit" value="new tribe">
+          </form>
+        </td>
+        <td></td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @user.tribes.each do |tribe| %>
+        <tr>
+          <td><%= tribe.name %></td>
+          <td><a href="/users/<%= @user.username %>/tribes/<%= tribe.slug %>/messengers">messengers</a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You don't own any tribes! How about you make a <a href="/tribes/new">new tribe</a>?</p>
+<% end %>
