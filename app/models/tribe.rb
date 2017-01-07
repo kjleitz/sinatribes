@@ -77,7 +77,8 @@ class Tribe < ActiveRecord::Base
   end
 
   def buy_land(amt)
-    add_land(amt) if lose_money(amt * LAND_PRICE)
+    # ternary w/ false because the alt is true (style dictates false, not nil)
+     lose_money(amt * LAND_PRICE) ? add_land(amt) : false
   end
 
   def add_land(amt)
@@ -85,6 +86,7 @@ class Tribe < ActiveRecord::Base
   end
 
   def lose_land(amt)
+    # ternary w/ false because the alt is true (style dictates false, not nil)
     self.land >= amt ? self.update(land: self.land - amt) : false
   end
 
