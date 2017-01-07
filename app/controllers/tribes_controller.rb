@@ -30,4 +30,18 @@ class TribesController < ApplicationController
     end
   end
 
+  post "/tribes/:slug/buildings" do |slug|
+    if @tribe = current_user.tribes.find_by_slug(slug)
+      if @tribe.build_building(params[:building_name])
+        flash[:message] = "#{params[:building_name].capitalize} successfully built!"
+      else
+        building = Building.find_by(name: params[:building_name])
+        flash[:message] = "You need $#{building.price} and #{building.resource_amount} #{building.resource_name} to build that building."
+      end
+    else
+      flash[:message] = "Something went wrong. Please try again."
+    end
+    redirect to("/tribes/#{slug}/manage")
+  end
+
 end
