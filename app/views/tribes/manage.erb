@@ -1,6 +1,7 @@
 <h1>Manage "<%= @tribe.name %>"</h1>
 
 <table>
+  <tcaption>General</tcaption>
   <tr>
     <td>Name:</td>
     <td><%= @tribe.name %></td>
@@ -16,9 +17,11 @@
 </table>
 
 <table>
+  <tcaption>Moolah</tcaption>
   <tr>
     <td>Tribe net worth:</td>
     <td><%= @tribe.money %></td>
+    <td></td>
   </tr>
   <tr>
     <td>Taxes to collect:</td>
@@ -30,4 +33,68 @@
       </form>
     </td>
   </tr>
+</table>
+
+<table>
+  <tcaption>Census</tcaption>
+  <tr>
+    <td>Total population:</td>
+    <td><%= @tribe.population.total %></td>
+  </tr>
+  <tr>
+    <td>Warriors:</td>
+    <td><%= @tribe.warriors %></td>
+  </tr>
+  <tr>
+    <td>Farmers:</td>
+    <td><%= @tribe.farmers %></td>
+  </tr>
+  <tr>
+    <td>Priests:</td>
+    <td><%= @tribe.priests %></td>
+  </tr>
+  <tr>
+    <td>Happiness:</td>
+    <td><%= @tribe.happiness %></td>
+  </tr>
+</table>
+
+<table>
+  <tcaption>Infrastructure</tcaption>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Building Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @tribe.buildings.empty? %>
+      <tr>
+        <td></td>
+        <td><em>You have no buildings.</em></td>
+      </tr>
+    <% else %>
+      <% @tribe.buildings.each do |building| %>
+        <tr>
+          <td><%= @tribe.count_building(building.name) %></td>
+          <td><%= building.name %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>New:</td>
+      <td>
+        <form action="/tribes/<%= @tribe.slug %>/build" method="post">
+          <select name="building_name">
+            <% @buildings.each do |building| %>
+              <option value="<%= building.name %>"><%= building.name %> - $<%= building.price %> + <%= building.resource_amount %> <%= building.resource_name %></option>
+            <% end %>
+          </select>
+          <input type="submit" value="Buy">
+        </form>
+      </td>
+    </tr>
+  </tfoot>
 </table>
