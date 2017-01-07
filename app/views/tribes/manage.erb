@@ -1,0 +1,33 @@
+<h1>Manage "<%= @tribe.name %>"</h1>
+
+<table>
+  <tr>
+    <td>Name:</td>
+    <td><%= @tribe.name %></td>
+  </tr>
+  <tr>
+    <td>Land:</td>
+    <td><%= @tribe.land %> square miles</td>
+  </tr>
+  <tr>
+    <td>Technology:</td>
+    <td><%= @tribe.technology %></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>Tribe net worth:</td>
+    <td><%= @tribe.money %></td>
+  </tr>
+  <tr>
+    <td>Taxes to collect:</td>
+    <td><%= @tribe.population.taxes %></td>
+    <td>
+      <form action="/tribes/<%= @tribe.slug %>/tax" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <input type="submit" value="Collect">
+      </form>
+    </td>
+  </tr>
+</table>
