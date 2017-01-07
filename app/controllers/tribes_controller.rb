@@ -39,7 +39,7 @@ class TribesController < ApplicationController
         flash[:message] = "You need $#{building.price} and #{building.resource_amount} #{building.resource_name} to build that building."
       end
     else
-      flash[:message] = "Something went wrong. Please try again."
+      flash[:message] = "This is not your tribe to buy buildings for!"
     end
     redirect to("/tribes/#{slug}/manage")
   end
