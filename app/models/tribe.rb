@@ -16,6 +16,7 @@ class Tribe < ActiveRecord::Base
   validates_presence_of :religion
 
   after_create :initialize_tax_time
+  after_create :make_active_tribe
 
   def initialize(args)
     super
@@ -27,6 +28,10 @@ class Tribe < ActiveRecord::Base
 
   def initialize_tax_time
     self.update(last_tax_collection: self.last_tax_collection || self.created_at)
+  end
+
+  def make_active_tribe
+    self.user.switch_active_tribe_to(self)
   end
 
   def warriors
