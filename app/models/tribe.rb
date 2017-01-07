@@ -1,4 +1,7 @@
 class Tribe < ActiveRecord::Base
+
+  include Slugifiable
+  
   belongs_to :user
   belongs_to :religion
   has_one :population
