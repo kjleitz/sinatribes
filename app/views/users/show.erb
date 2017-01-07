@@ -1,0 +1,15 @@
+<h1><%= @user.username %>'s tribes</h1>
+
+<% if @user.tribes %>
+  <table>
+    <tcaption>Owned tribes:</tcaption>
+    <% @user.tribes.each do |tribe| %>
+      <tr>
+        <td><a href="/tribes/<%= tribe.slug %>"><%= tribe.name %></a></td>
+        <td><a href="/messengers/<%= tribe.id %>">Run a messenger</a></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>This user doesn't own any tribes. What a <em>loser!</em></p>
+<% end %>
