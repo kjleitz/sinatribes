@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :tribes
+  belongs_to :tribe
 
   has_secure_password
   validates_presence_of :username
