@@ -7,6 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Owner</th>
+      <th>Diplomacy</th>
     </tr>
   </thead>
   <tfoot>
@@ -17,6 +18,7 @@
         </form>
       </td>
       <td></td>
+      <td></td>
     </tr>
   </tfoot>
   <tbody>
@@ -24,6 +26,7 @@
       <tr>
         <td><a href="/tribes/<%= tribe.slug %>"><%= tribe.name %></a></td>
         <td><a href="/users/<%= tribe.user.username %>"><%= tribe.user.username %></a></td>
+        <td><a href="/messengers/<%= tribe.id %>">Run a messenger</a></td>
       </tr>
     <% end %>
   </tbody>
