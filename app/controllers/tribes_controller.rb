@@ -6,6 +6,7 @@ class TribesController < ApplicationController
   end
 
   get "/tribes/new" do
+    @religions = Religion.all
     erb :"tribes/new"
   end
 
