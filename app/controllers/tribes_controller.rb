@@ -69,4 +69,13 @@ class TribesController < ApplicationController
     redirect to("/")
   end
 
+  patch "/tribes/:slug/land" do |slug|
+    if @tribe = current_user.tribes.find_by_slug(slug)
+      @tribe.buy_land(params[:amount]) || flash[:message] = "You cannot afford that amount of land."
+    else
+      flash[:message] = "This is not your tribe to buy land for!"
+    end
+    redirect to("/tribes/#{slug}/manage")
+  end
+
 end
