@@ -10,7 +10,9 @@ class ApplicationController < Sinatra::Base
     use Rack::Flash
     set(:logged_in) { |bool| condition { logged_in? == bool } }
     set(:current_user_tribe) do |bool|
-      condition { !!current_user.tribes.find_by_slug(params[:slug]) == bool }
+      condition do
+        !!(@tribe = current_user.tribes.find_by_slug(params[:slug])) == bool
+      end
     end
   end
 
