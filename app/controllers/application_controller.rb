@@ -9,6 +9,11 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "after all these implements and texts designed by intellects"
     use Rack::Flash
     set(:logged_in) { |bool| condition { logged_in? == bool } }
+    set(:current_user_tribe) do |bool|
+      condition do
+        !!current_user.tribes.find_by_slug(params[:slug]) == bool
+      end
+    end
   end
 
   get "/", logged_in: false do
