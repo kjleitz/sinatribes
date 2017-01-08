@@ -1,6 +1,8 @@
 <h1><%= @tribe.name %></h1>
 
-<p>Run a <a href="/messengers/new/<%= @tribe.id %>">messenger</a> to this tribe!</p>
+<% unless @tribe.user == @current_user %>
+  <p>Run a <a href="/messengers/new/<%= @tribe.id %>">messenger</a> to this tribe!</p>
+<% end %>
 
 <table>
   <tcaption>General</tcaption>

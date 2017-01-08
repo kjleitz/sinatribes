@@ -23,6 +23,7 @@ class TribesController < ApplicationController
 
   get "/tribes/:slug" do |slug|
     @tribe = Tribe.find_by_slug(slug)
+    @current_user = current_user
     erb :"/tribes/show"
   end
 
