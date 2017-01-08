@@ -16,7 +16,7 @@ class TribesController < ApplicationController
       flash[:message] = "Tribe created successfully!"
       redirect to("/tribes/#{tribe.slug}/manage")
     else
-      flash[:message] = "Something went wrong. Please try again."
+      flash[:message] = "Something went wrong. Please try again!"
       redirect to("/tribes/new")
     end
   end
@@ -65,6 +65,15 @@ class TribesController < ApplicationController
       flash[:message] = "You cannot afford that amount of land."
     end
     redirect to("/tribes/#{slug}/manage")
+  end
+
+  delete "/tribes/:slug/delete", current_user_tribe: true do |slug|
+    if @tribe.destroy
+      flash[:message] = "Successfully deleted \"#{@tribe.name}\"."
+    else
+      flash[:message] = "Something went wrong. Please try again!"
+    end
+    redirect to("/")
   end
 
   def not_your_tribe
