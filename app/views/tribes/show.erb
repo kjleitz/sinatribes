@@ -1,0 +1,38 @@
+<h1><%= @tribe.name %></h1>
+
+<table>
+  <tcaption>General</tcaption>
+  <tr>
+    <td>Land owned:</td>
+    <td><%= @tribe.land %> sq. miles</td>
+  </tr>
+  <tr>
+    <td>Total population:</td>
+    <td><%= @tribe.population.total %> people</td>
+  </tr>
+</table>
+
+<table>
+  <tcaption>Infrastructure</tcaption>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Building Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if tribe.buildings.empty? %>
+      <tr>
+        <td></td>
+        <td><em>This tribe has no buildings. It's flat land and huddled people, as far as the eye can see!</em></td>
+      </tr>
+    <% else %>
+      <% @tribe.buildings.uniq.each do |building| %>
+        <tr>
+          <td><%= @tribe.count_building(building.name) %></td>
+          <td><%= building.name.capitalize %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
