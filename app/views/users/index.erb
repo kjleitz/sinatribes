@@ -30,6 +30,13 @@
               </form>
             <% end %>
           </td>
+          <td class="delete">
+            <form action="/tribes/<%= tribe.slug %>/delete" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <input type="submit" value="Delete">
+              <em>(<strong>Warning!</strong> Deleting a tribe is permanent!)</em>
+            </form>
+          </td>
         </tr>
       <% end %>
     </tbody>
