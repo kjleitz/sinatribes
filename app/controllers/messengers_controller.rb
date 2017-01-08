@@ -1,0 +1,3 @@
+class MessengersController < ApplicationController
+
+end
