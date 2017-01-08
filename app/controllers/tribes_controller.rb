@@ -21,6 +21,11 @@ class TribesController < ApplicationController
     end
   end
 
+  get "/tribes/:slug" do |slug|
+    @tribe = Tribe.find_by_slug(slug)
+    erb :"/tribes/show"
+  end
+
   patch "/tribes/:slug/activate", current_user_tribe: true do |slug|
     @tribe.make_active_tribe || flash[:message] = "Something went wrong. Please try again!"
     redirect to("/")
@@ -61,5 +66,15 @@ class TribesController < ApplicationController
     end
     redirect to("/tribes/#{slug}/manage")
   end
+
+  def not_your_tribe
+    flash[:message] = "This is not your tribe. Why are you trying to do that?"
+    redirect to("/tribes/#{params[:slug]}")
+  end
+
+  get("/tribes/:slug/*", current_user_tribe: false) { not_your_tribe }
+  post("/tribes/:slug/*", current_user_tribe: false) { not_your_tribe }
+  patch("/tribes/:slug/*", current_user_tribe: false) { not_your_tribe }
+  delete("/tribes/:slug/*", current_user_tribe: false) { not_your_tribe }
 
 end
