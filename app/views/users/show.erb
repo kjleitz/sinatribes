@@ -6,7 +6,7 @@
     <% @user.tribes.each do |tribe| %>
       <tr>
         <td><a href="/tribes/<%= tribe.slug %>"><%= tribe.name %></a></td>
-        <td><a href="/messengers/<%= tribe.id %>">Run a messenger</a></td>
+        <td><a href="/messengers/new/<%= tribe.id %>">Run a messenger</a></td>
       </tr>
     <% end %>
   </table>

@@ -19,7 +19,7 @@
         <tr>
           <td><%= tribe.name %></td>
           <td><a href="/tribes/<%= tribe.slug %>/manage">Manage</a></td>
-          <td><a href="/tribes/<%= tribe.slug %>/messengers">Messengers</a></td>
+          <td><a href="/messengers/<%= tribe.slug %>">Messengers</a></td>
           <td>
             <% if @user.tribe == tribe %>
               <strong>(active tribe)</strong>
