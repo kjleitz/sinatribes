@@ -1,10 +1,9 @@
 class MessengersController < ApplicationController
 
   get "/messengers/new/:id" do |id|
-    if destination = Tribe.find_by(id: id)
-      if tribe = current_user.tribe
-        if tribe != destination
-          @messenger = Messenger.create(tribe: tribe, destination: destination)
+    if @destination = Tribe.find_by(id: id)
+      if @tribe = current_user.tribe
+        if @tribe != @destination
           erb :"messengers/new"
         else
           flash[:message] = "This is your tribe. You can't send a messenger to your own tribe, silly!"

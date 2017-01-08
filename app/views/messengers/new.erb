@@ -1,12 +1,12 @@
 <h1>Run a messenger!</h1>
 
-<h2>Source tribe: "<%= @messenger.tribe.name %>" <em>(your active tribe)</em></h2>
-<h2>Destination tribe: "<%= @messenger.destination.name %>"</h2>
+<h2>Source tribe: "<%= @tribe.name %>" <em>(your active tribe)</em></h2>
+<h2>Destination tribe: "<%= @destination.name %>"</h2>
 
 <form action="/messengers" method="post">
 
   <p><label for="message"><em>Have the messenger relay a message:</em></label></p>
-  <p><textarea name="message" id="msg_box" cols="30" rows="10">What's happenin', <%= @messenger.destination.name %>?</textarea></p>
+  <p><textarea name="message" id="msg_box" cols="30" rows="10">What's happenin', <%= @destination.name %>?</textarea></p>
 
   <table id="gift_table">
     <tcaption><em>Have the messenger carry a gift:</em></tcaption>
@@ -25,12 +25,12 @@
     <tr>
       <td>Resource:</td>
       <td>
-        <% if @messenger.tribe.resources.empty? %>
+        <% if @tribe.resources.empty? %>
           <em>You have no resources to attach.</em>
         <% else %>
           <select name="resource_name">
-            <% @messenger.tribe.resources.uniq.each do |resource| %>
-              <option value="<%= resource.name %>"><%= resource.name.capitalize %> (you have <%= @messenger.tribe.count_resource(resource.name) %> of this resource)</option>
+            <% @tribe.resources.uniq.each do |resource| %>
+              <option value="<%= resource.name %>"><%= resource.name.capitalize %> (you have <%= @tribe.count_resource(resource.name) %> of this resource)</option>
             <% end %>
           </select>
         <% end %>
