@@ -11,7 +11,7 @@ class Gift < ActiveRecord::Base
       receiver = reclaim ? self.messenger.tribe : self.messenger.destination
       receiver.add_money(self.money)
       receiver.add_warriors(self.warriors)
-      receiver.collect_resource(self.resource)
+      receiver.collect_resource(self.resource) if self.resource
       self.update(accepted: true)
     end
   end
