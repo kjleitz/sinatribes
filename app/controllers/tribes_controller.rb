@@ -92,6 +92,15 @@ class TribesController < ApplicationController
     redirect to("/tribes/#{slug}/manage")
   end
 
+  patch "/tribes/:slug/priests", current_user_tribe: true do |slug|
+    if @tribe.ordain_priest
+      flash[:message] = "Successfully ordained a priest. Nobody's holier than thou!"
+    else
+      flash[:message] = "Priests are men of the cloth... one cloth, specifically. Try again when you have some."
+    end
+    redirect to("/tribes/#{slug}/manage")
+  end
+
   delete "/tribes/:slug/delete", current_user_tribe: true do |slug|
     if @tribe.destroy
       flash[:message] = "Successfully deleted \"#{@tribe.name}\"."
