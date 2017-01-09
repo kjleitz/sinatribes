@@ -48,7 +48,12 @@ scalpers = Tribe.create(
   name: "Ticket Scalpers Anonymous",
   money: 5000000,
   user: peabody,
-  religion: paganism
+  religion: paganism,
+  population: Population.create(
+    warriors: 125,
+    farmers: 100,
+    priests: 30
+  )
 )
 nerds = Tribe.create(
   name: "Aquarium Nerds",
@@ -120,3 +125,9 @@ town_hall = Building.create(
 )
 
 survivors.build_building("hut")
+
+10.times { scalpers.add_resource("iron") }
+8.times { scalpers.add_resource("wood") }
+25.times { scalpers.add_resource("food") }
+30.times { scalpers.add_resource("stone") }
+6.times { scalpers.add_resource("cloth") }
