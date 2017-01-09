@@ -125,7 +125,7 @@
         <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
           <select name="building_name">
             <% @buildings.each do |building| %>
-              <option value="<%= building.name %>"><%= building.name.capitalize %> - $<%= building.price %> + <%= building.resource_amount %> <%= building.resource_name %></option>
+              <option value="<%= building.name %>"><%= building.name.capitalize %>: $<%= building.price %> + <%= building.resource_amount %> <%= building.resource_name %></option>
             <% end %>
           </select>
           <input type="submit" value="Buy">
