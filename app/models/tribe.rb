@@ -118,7 +118,7 @@ class Tribe < ActiveRecord::Base
   end
 
   def lose_resource(resource_name)
-    if resource = self.resources.find_by(name: resource)
+    if resource = self.resources.find_by(name: resource_name)
       resource.destroy
     end
   end
