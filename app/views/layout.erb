@@ -12,14 +12,14 @@
     <div id="logo"><a href="/">SinaTribes</a></div>
     <nav id="main_nav">
       <% if session[:user_id] %>
-        <a href="/">home</a>
-        <a href="/tribes">world</a>
+        <a href="/">Home</a>
+        <a href="/tribes">World</a>
         <a href="/tribes/<%= current_user.tribe.slug %>/manage"><%= current_user.tribe.name %></a>
-        <a href="/messengers/<%= current_user.tribe.slug %>">messengers</a>
-        <a href="/logout">log out</a>
+        <a href="/messengers/<%= current_user.tribe.slug %>">Messengers</a>
+        <a href="/logout">Log out</a>
       <% else %>
-        <a href="/signup">sign up</a>
-        <a href="/login">log in</a>
+        <a href="/signup">Sign up</a>
+        <a href="/login">Log in</a>
       <% end %>
     </nav>
   </header>
