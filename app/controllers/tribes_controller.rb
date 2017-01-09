@@ -38,6 +38,7 @@ class TribesController < ApplicationController
   get "/tribes/:slug/manage", current_user_tribe: true do |slug|
     @buildings = Building.all
     @land_price = Tribe::LAND_PRICE
+    @warrior_price = Tribe::WARRIOR_PRICE
     erb :"tribes/manage"
   end
 
