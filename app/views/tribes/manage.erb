@@ -17,7 +17,7 @@
         <input type="hidden" name="_method" value="patch">
         <input type="number" name="amount">
         <input type="submit" value="Buy">
-        ($<%= @land_price %>/mi<sup>2</sup>)
+        <em>($<%= @land_price %>/mi<sup>2</sup>)</em>
       </form>
     </td>
   </tr>
@@ -65,7 +65,7 @@
           <input type="hidden" name="_method" value="patch">
           <input type="number" name="amount">
           <input type="submit" value="Enlist">
-          ($<%= @warrior_price %>/warrior)
+          <em>($<%= @warrior_price %>/warrior)</em>
         </form>
       <% end %>
     </td>
@@ -82,7 +82,7 @@
         <form action="/tribes/<%= @tribe.slug %>/priests" method="post">
           <input type="hidden" name="_method" value="patch">
           <input type="submit" value="Ordain a priest">
-          (1 cloth is necessary to ordain a priest)
+          <em>(1 cloth/priest)</em>
         </form>
       <% end %>
     </td>
