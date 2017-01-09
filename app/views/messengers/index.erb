@@ -20,7 +20,6 @@
           <td><%= messenger.created_at %></td>
           <td><%= messenger.message %></td>
           <% gift = messenger.gift %>
-          <% binding.pry %>
           <% if gift.money > 0 || gift.warriors > 0 || gift.resource %>
             <td>
               <%= "$#{gift.money}" if gift.money > 0 %>
