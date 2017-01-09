@@ -7,12 +7,15 @@ class Building < ActiveRecord::Base
   ACTIONS = {
     "factory" => "manufacture",
     "farm" => "harvest",
-    "mine" => "mine",
-    "barracks" => "train"
+    "mine" => "mine"
   }
 
   def initialize_action
     self.update(action: action) if action = ACTIONS[self.name]
+  end
+
+  def use
+    Resource.send(self.action)
   end
 
 end
