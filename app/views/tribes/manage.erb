@@ -101,6 +101,7 @@
     <tr>
       <th>#</th>
       <th>Building Type</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -108,29 +109,39 @@
       <tr>
         <td></td>
         <td><em>You have no buildings.</em></td>
+        <td></td>
       </tr>
     <% else %>
       <% @tribe.buildings.uniq.each do |building| %>
         <tr>
           <td><%= @tribe.count_building(building.name) %></td>
           <td><%= building.name %></td>
+          <td>
+            <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
+              <input type="hidden" name="_method" value="patch">
+              <input type="hidden" name="building_name" value="<%= building.name %>">
+              <input type="submit" value="<%= building.action.capitalize %>">
+            </form>
+          </td>
         </tr>
       <% end %>
     <% end %>
   </tbody>
   <tfoot>
+    <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
     <tr>
       <td></td>
       <td>
-        <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
-          <select name="building_name">
-            <% @buildings.each do |building| %>
-              <option value="<%= building.name %>"><%= building.name.capitalize %>: $<%= building.price %> + <%= building.resource_amount %> <%= building.resource_name %></option>
-            <% end %>
-          </select>
-          <input type="submit" value="Buy">
-        </form>
+        <select name="building_name">
+          <% @buildings.each do |building| %>
+            <option value="<%= building.name %>"><%= building.name.capitalize %>: $<%= building.price %> + <%= building.resource_amount %> <%= building.resource_name %></option>
+          <% end %>
+        </select>
+      </td>
+      <td>
+        <input type="submit" value="Buy">
       </td>
     </tr>
+  </form>
   </tfoot>
 </table>
