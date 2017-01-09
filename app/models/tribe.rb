@@ -110,7 +110,7 @@ class Tribe < ActiveRecord::Base
     self.resources.where(name: resource_name).count
   end
 
-  def resource_list
+  def list_resources
     self.resources.map { |resource| resource.name }.uniq
   end
 
