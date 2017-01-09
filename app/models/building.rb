@@ -20,8 +20,8 @@ class Building < ActiveRecord::Base
 
   def use
     if self.usable?
-      Resource.send(self.action)
       self.update(last_used: Time.now)
+      Resource.send(self.action)
     end
   end
 
