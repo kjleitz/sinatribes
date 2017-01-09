@@ -15,7 +15,7 @@ class Building < ActiveRecord::Base
   end
 
   def use
-    Resource.send(self.action)
+    Resource.send(self.action) if self.action
   end
 
 end
