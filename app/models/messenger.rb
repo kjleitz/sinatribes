@@ -3,6 +3,12 @@ class Messenger < ActiveRecord::Base
   belongs_to :tribe
   belongs_to :destination, foreign_key: :destination_id, class_name: 'Tribe'
 
+  after_create :initialize_with_gift
+
+  def initialize_with_gift
+    self.update(gift: Gift.create) unless self.gift
+  end
+
   def rejected?
     self.rejected
   end
