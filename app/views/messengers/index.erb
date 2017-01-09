@@ -34,7 +34,7 @@
               <% elsif !messenger.rejected? %>
                 <form action="/messengers/<%= @tribe.slug %>" method="post">
                   <input type="hidden" name="_method" value="patch">
-                  <input type="hidden" name="accept_gift" value="accept">
+                  <input type="hidden" name="accept_gift" value="<%= gift.id %>">
                   <input type="submit" value="Accept gift">
                 </form>
               <% end %>
