@@ -17,7 +17,7 @@ class Gift < ActiveRecord::Base
   end
 
   def add_money(amt)
-    self.update(money: amt) if self.messenger.tribe.pay(amt)
+    self.update(money: amt) if self.messenger.tribe.lose_money(amt)
   end
 
   def add_warriors(amt)
