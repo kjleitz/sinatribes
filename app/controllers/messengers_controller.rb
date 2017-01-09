@@ -28,9 +28,10 @@ class MessengersController < ApplicationController
         messenger = Messenger.create(
           message: params[:message],
           tribe: current_user.tribe,
-          destination: destination,
-          gift: Gift.create(params[:gift])
+          destination: destination
         )
+        messenger.gift.add_money(params[:gift][:money].to_i)
+        messenger.gift.add_warriors(params[:gift][:warriors].to_i)
         messenger.gift.attach_resource(params[:resource_name])
         if messenger && messenger.gift
           flash[:message] = "Successfully sent the messenger!"
