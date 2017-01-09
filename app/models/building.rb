@@ -16,6 +16,7 @@ class Building < ActiveRecord::Base
 
   def use
     Resource.send(self.action) if self.action
+    self.update(last_used) = Time.now
   end
 
 end
