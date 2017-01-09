@@ -26,7 +26,7 @@
             <td>
               <%= "$#{gift.money}" if gift.money > 0 %>
               <%= "|" if gift.money > 0 && (gift.warriors > 0 || gift.resource) %>
-              <%= "#{gift.warriors} warriors" if gift.warriors > 0 %>
+              <%= "#{gift.warriors} warrior#{"s" if gift.warriors > 1}" if gift.warriors > 0 %>
               <%= "|" if (gift.money > 0 || gift.warriors > 0) && gift.resource %>
               <%= gift.resource.name.capitalize if gift.resource %>
               <% if gift.accepted? %>
@@ -85,7 +85,7 @@
             <td>
               <%= "$#{gift.money}" if gift.money > 0 %>
               <%= "|" if gift.money > 0 && (gift.warriors > 0 || gift.resource) %>
-              <%= "#{gift.warriors} warriors" if gift.warriors > 0 %>
+              <%= "#{gift.warriors} warrior#{"s" if gift.warriors > 1}" if gift.warriors > 0 %>
               <%= "|" if (gift.money > 0 || gift.warriors > 0) && gift.resource %>
               <%= gift.resource.name.capitalize if gift.resource %>
               <% if gift.accepted? %>
