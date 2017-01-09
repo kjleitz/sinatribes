@@ -4,6 +4,7 @@ class Building < ActiveRecord::Base
 
   after_create :initialize_action
 
+  BUILDING_WAIT_PERIOD = 300
   ACTIONS = {
     "factory" => "manufacture",
     "farm" => "harvest",
@@ -15,7 +16,7 @@ class Building < ActiveRecord::Base
   end
 
   def usable?
-    !!self.action
+    self.action && (Time.now - self.last_used) > BUILDING_WAIT_PERIOD
   end
 
   def use
