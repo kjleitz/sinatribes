@@ -22,9 +22,12 @@ class TribesController < ApplicationController
   end
 
   get "/tribes/:slug" do |slug|
-    @tribe = Tribe.find_by_slug(slug)
-    @current_user = current_user
-    erb :"/tribes/show"
+    if @tribe = Tribe.find_by_slug(slug)
+      @current_user = current_user
+      erb :"/tribes/show"
+    else
+      404
+    end
   end
 
   patch "/tribes/:slug/activate", current_user_tribe: true do |slug|
