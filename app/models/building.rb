@@ -15,6 +15,10 @@ class Building < ActiveRecord::Base
     self.update(action: ACTIONS[self.name]) if ACTIONS[self.name]
   end
 
+  def initialize_used_time
+    self.update(last_used: Time.now) unless self.last_used
+  end
+
   def usable?
     self.action && (Time.now - self.last_used) > BUILDING_WAIT_PERIOD
   end
