@@ -145,6 +145,13 @@ mine = Building.create(
   resource_name: "stone"
 )
 
+temple = Building.create(
+  name: "temple",
+  price: 750,
+  resource_amount: 5,
+  resource_name: stone
+)
+
 survivors.build_building("hut")
 
 10.times { scalpers.add_resource("iron") }
@@ -162,4 +169,5 @@ survivors.build_building("hut")
 4.times { scalpers.add_building("hut") }
 2.times { scalpers.add_building("barracks") }
 2.times { scalpers.add_building("town hall") }
+2.times { scalpers.add_building("temple") }
 5.times { scalpers.add_building("farm") }
