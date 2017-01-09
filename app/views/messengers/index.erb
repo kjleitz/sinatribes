@@ -4,7 +4,7 @@
   <tcaption>Visiting messengers</tcaption>
   <% if @received_messengers.empty? %>
     <tr>
-      <td><em>No messengers have been sent to your tribe, in recent memory.</em></td>
+      <td><em>No messengers have been sent to your tribe... in recent memory, at least.</em></td>
     </tr>
   <% else %>
     <thead>
@@ -15,17 +15,18 @@
       </tr>
     </thead>
     <tbody>
-      <% @received_messengers.each.do |messenger| %>
+      <% @received_messengers.each do |messenger| %>
         <tr>
           <td><%= messenger.created_at %></td>
           <td><%= messenger.message %></td>
           <% gift = messenger.gift %>
+          <% binding.pry %>
           <% if gift.money > 0 || gift.warriors > 0 || gift.resource %>
             <td>
               <%= "$#{gift.money}" if gift.money > 0 %>
               <%= "|" if gift.money > 0 && (gift.warriors > 0 || gift.resource) %>
               <%= "#{gift.warriors} warriors" if gift.warriors > 0 %>
-              <%= "|" if (gift.money > 0 || gift.warriors > 0) && gift.resource) %>
+              <%= "|" if (gift.money > 0 || gift.warriors > 0) && gift.resource %>
               <%= gift.resource.name.capitalize if gift.resource %>
               <% if gift.accepted? %>
                 <strong>(gift accepted)</strong>
