@@ -59,8 +59,14 @@ class MessengersController < ApplicationController
       else
         flash[:message] = "Something went wrong. Did you already accept that gift? Are you getting GREEDY?"
       end
-    else
-      flash[:message] = "Huh. That gift doesn't seem to exist! Isn't that weird?"
+    end
+
+    if messenger = Messenger.find_by(id: params[:reject_messenger])
+      if messenger.reject
+        flash[:message] = "Messenger rejected!"
+      else
+        flash[:message] = "Something went wrong. Did you already reject that messenger? Aren't you kinda beating a dead horse? Give the guy a break. Sheesh."
+      end
     end
     redirect to("/messengers/#{@tribe.slug}")
   end
