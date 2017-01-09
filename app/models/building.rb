@@ -11,7 +11,7 @@ class Building < ActiveRecord::Base
   }
 
   def initialize_action
-    self.update(action: action) if action = ACTIONS[self.name]
+    self.update(action: ACTIONS[self.name]) if ACTIONS[self.name]
   end
 
   def usable?
