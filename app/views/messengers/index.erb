@@ -48,7 +48,7 @@
             <td>
               <form action="/messengers/<%= @tribe.slug %>" method="post">
                 <input type="hidden" name="_method" value="patch">
-                <input type="hidden" name="reject_messenger" value="reject">
+                <input type="hidden" name="reject_messenger" value="<%= messenger.id %>">
                 <input type="submit" value="Reject unwanted visitor">
               </form>
             </td>
