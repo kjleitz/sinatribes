@@ -51,6 +51,16 @@ class TribesController < ApplicationController
     redirect to("/tribes/#{slug}/manage")
   end
 
+  patch "/tribes/:slug/buildings", current_user_tribe: true do |slug|
+    amt, resource_name = @tribe.use_building(params[:building_name])
+    if amt > 0
+      flash[:message] = "Obtained #{amt} #{resource_name}!"
+    else
+      flash[:message] = "You can't collect resources from this building."
+    end
+    redirect to("/tribes/#{slug}/manage")
+  end
+
   patch "/tribes/:slug/taxes", current_user_tribe: true do |slug|
     if @tribe.collect_taxes
       flash[:message] = "Successfully collected $#{@tribe.population.taxes}!"
