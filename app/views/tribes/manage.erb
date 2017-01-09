@@ -130,20 +130,19 @@
     <% end %>
   </tbody>
   <tfoot>
-    <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
     <tr>
       <td></td>
+      <td>[new building]</td>
       <td>
-        <select name="building_name">
-          <% @buildings.each do |building| %>
+        <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
+          <select name="building_name">
+            <% @buildings.each do |building| %>
             <option value="<%= building.name %>"><%= building.name.capitalize %>: $<%= building.price %> + <%= building.resource_amount %> <%= building.resource_name %></option>
-          <% end %>
-        </select>
-      </td>
-      <td>
-        <input type="submit" value="Buy">
+            <% end %>
+          </select>
+          <input type="submit" value="Buy">
+        </form>
       </td>
     </tr>
-  </form>
   </tfoot>
 </table>
