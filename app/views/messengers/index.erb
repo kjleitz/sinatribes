@@ -9,7 +9,7 @@
   <% else %>
     <thead>
       <tr>
-        <th>Time</th>
+        <th>Time Received</th>
         <th>Message</th>
         <th>Gift Contents</th>
       </tr>
@@ -50,6 +50,53 @@
                 <input type="submit" value="Reject unwanted visitor">
               </form>
             </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
+
+<table>
+  <tcaption>Messengers abroad</tcaption>
+  <% if @sent_messengers.empty? %>
+    <tr>
+      <td><em>You have not sent any messengers to other tribes. Not <strong>yet</strong>.</em></td>
+    </tr>
+  <% else %>
+    <thead>
+      <tr>
+        <th>Time Sent</th>
+        <th>Message</th>
+        <th>Gift Contents</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sent_messengers.each do |messenger| %>
+        <tr>
+          <td><%= messenger.created_at %></td>
+          <td><%= messenger.message %></td>
+          <% gift = messenger.gift %>
+          <% if gift.money > 0 || gift.warriors > 0 || gift.resource %>
+            <td>
+              <%= "$#{gift.money}" if gift.money > 0 %>
+              <%= "|" if gift.money > 0 && (gift.warriors > 0 || gift.resource) %>
+              <%= "#{gift.warriors} warriors" if gift.warriors > 0 %>
+              <%= "|" if (gift.money > 0 || gift.warriors > 0) && gift.resource %>
+              <%= gift.resource.name.capitalize if gift.resource %>
+              <% if gift.accepted? %>
+                <strong>Your gift has been <%= messenger.rejected? ? "rudely taken" : "accepted" %>.</strong>
+              <% else %>
+                Your gift <%= messenger.rejected? ? "was not" : "has not yet been" %> accepted.
+              <% end %>
+            </td>
+          <% else %>
+            <td><em>You did not send this messenger with a gift.</em></td>
+          <% end %>
+          <% if messenger.rejected? %>
+            <td><strong>The receiving tribe rejected this messenger!</strong></td>
+          <% else %>
+            <td>Your messenger is welcome at his destination... for <em>now</em>.</td>
           <% end %>
         </tr>
       <% end %>
