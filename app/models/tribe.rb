@@ -83,6 +83,10 @@ class Tribe < ActiveRecord::Base
     self.warriors >= amt ? self.population.update(warriors: self.warriors - amt) : false
   end
 
+  def add_priests(amt)
+    self.population.update(priests: self.priests + amt)
+  end
+
   def buy_land(amt)
     # ternary w/ false because the alt is true (style dictates false, not nil)
      lose_money(amt * LAND_PRICE) ? add_land(amt) : false
