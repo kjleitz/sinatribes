@@ -20,6 +20,7 @@ class Tribe < ActiveRecord::Base
 
   TAX_WAIT_PERIOD = 300
   LAND_PRICE = 100
+  WARRIOR_PRICE = 50
 
   def initialize(args)
     super
@@ -65,6 +66,12 @@ class Tribe < ActiveRecord::Base
     if (Time.now - self.last_tax_collection) > TAX_WAIT_PERIOD
       add_money(self.population.taxes)
       self.update(last_tax_collection: Time.now)
+    end
+  end
+
+  def enlist_warriors(amt)
+    if has_building?("barracks") && lose_money(WARRIOR_PRICE * amt)
+      add_warriors(amt)
     end
   end
 
