@@ -149,7 +149,7 @@ temple = Building.create(
   name: "temple",
   price: 750,
   resource_amount: 5,
-  resource_name: stone
+  resource_name: "stone"
 )
 
 survivors.build_building("hut")
