@@ -1,0 +1,58 @@
+<h1>Messenger activity for <%= @tribe.name %></h1>
+
+<table>
+  <tcaption>Visiting messengers</tcaption>
+  <% if @received_messengers.empty? %>
+    <tr>
+      <td><em>No messengers have been sent to your tribe, in recent memory.</em></td>
+    </tr>
+  <% else %>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Message</th>
+        <th>Gift Contents</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @received_messengers.each.do |messenger| %>
+        <tr>
+          <td><%= messenger.created_at %></td>
+          <td><%= messenger.message %></td>
+          <% gift = messenger.gift %>
+          <% if gift.money > 0 || gift.warriors > 0 || gift.resource %>
+            <td>
+              <%= "$#{gift.money}" if gift.money > 0 %>
+              <%= "|" if gift.money > 0 && (gift.warriors > 0 || gift.resource) %>
+              <%= "#{gift.warriors} warriors" if gift.warriors > 0 %>
+              <%= "|" if (gift.money > 0 || gift.warriors > 0) && gift.resource) %>
+              <%= gift.resource.name.capitalize if gift.resource %>
+              <% if gift.accepted? %>
+                <strong>(gift accepted)</strong>
+              <% elsif !messenger.rejected? %>
+                <form action="/messengers/<%= @tribe.slug %>" method="post">
+                  <input type="hidden" name="_method" value="patch">
+                  <input type="hidden" name="accept_gift" value="accept">
+                  <input type="submit" value="Accept gift">
+                </form>
+              <% end %>
+            </td>
+          <% else %>
+            <td><em>This messenger did not bring a gift.</em></td>
+          <% end %>
+          <% if messenger.rejected? %>
+            <td><strong>(messenger rejected)</strong></td>
+          <% else %>
+            <td>
+              <form action="/messengers/<%= @tribe.slug %>" method="post">
+                <input type="hidden" name="_method" value="patch">
+                <input type="hidden" name="reject_messenger" value="reject">
+                <input type="submit" value="Reject unwanted visitor">
+              </form>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
