@@ -46,4 +46,8 @@ class MessengersController < ApplicationController
     end
   end
 
+  get "/messengers/:slug", current_user_tribe: true do |slug|
+    erb :"messengers/index"
+  end
+
 end
