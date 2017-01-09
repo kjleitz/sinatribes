@@ -54,11 +54,21 @@
   </tr>
   <tr>
     <td>Population density:</td>
-    <td><%= @tribe.population.density %> people/mi<sup>2</sup></td>
+    <td><%= @tribe.population.density %>/mi<sup>2</sup></td>
   </tr>
   <tr>
     <td>Warriors:</td>
     <td><%= @tribe.warriors %></td>
+    <td>
+      <% if @tribe.has_building?("barracks") %>
+        <form action="/tribes/<%= @tribe.slug %>/warriors" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <input type="number" name="amount">
+          <input type="submit" value="Enlist">
+          ($<%= @warrior_price %>/warrior)
+        </form>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td>Farmers:</td>
