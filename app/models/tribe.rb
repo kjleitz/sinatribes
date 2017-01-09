@@ -110,6 +110,10 @@ class Tribe < ActiveRecord::Base
     self.resources.where(name: resource_name).count
   end
 
+  def resource_list
+    self.resources.map { |resource| resource.name }.uniq
+  end
+
   # # The following two methods assume tribes can only build one of each type
   # # of building. I think this functionality makes sense, to some extent.
   #
