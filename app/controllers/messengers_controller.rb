@@ -47,6 +47,8 @@ class MessengersController < ApplicationController
   end
 
   get "/messengers/:slug", current_user_tribe: true do |slug|
+    @received_messengers = Messenger.where(destination_id: @tribe.id)
+    @sent_messengers = @tribe.messengers
     erb :"messengers/index"
   end
 
