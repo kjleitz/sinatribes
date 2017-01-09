@@ -31,6 +31,7 @@
           <em>You have no resources to attach.</em>
         <% else %>
           <select name="resource_name">
+            <option disabled selected value>[Has room for one resource]</option>
             <% @tribe.list_resources.each do |resource_name| %>
               <option value="<%= resource_name %>"><%= resource_name.capitalize %> (you have <%= @tribe.count_resource(resource_name) %> of this resource)</option>
             <% end %>
