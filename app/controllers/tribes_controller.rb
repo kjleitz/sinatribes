@@ -82,6 +82,16 @@ class TribesController < ApplicationController
     redirect to("/tribes/#{slug}/manage")
   end
 
+  patch "/tribes/:slug/warriors", current_user_tribe: true do |slug|
+    amt = params[:amount].to_i
+    if @tribe.enlist_warriors(amt.to_i)
+      flash[:message] = "Successfully enlisted #{amt} warrior#{"s" if amt > 1}. Feelin' strong!"
+    else
+      flash[:message] = "You cannot afford that many warriors."
+    end
+    redirect to("/tribes/#{slug}/manage")
+  end
+
   delete "/tribes/:slug/delete", current_user_tribe: true do |slug|
     if @tribe.destroy
       flash[:message] = "Successfully deleted \"#{@tribe.name}\"."
