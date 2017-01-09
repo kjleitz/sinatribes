@@ -131,3 +131,10 @@ survivors.build_building("hut")
 25.times { scalpers.add_resource("food") }
 30.times { scalpers.add_resource("stone") }
 6.times { scalpers.add_resource("cloth") }
+
+2.times { scalpers.add_building("school") }
+1.times { scalpers.add_building("hospital") }
+1.times { scalpers.add_building("walls") }
+4.times { scalpers.add_building("hut") }
+2.times { scalpers.add_building("barracks") }
+2.times { scalpers.add_building("town hall") }
