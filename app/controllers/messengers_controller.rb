@@ -52,7 +52,7 @@ class MessengersController < ApplicationController
     erb :"messengers/index"
   end
 
-  patch "messengers/:slug", current_user_tribe: true do
+  patch "/messengers/:slug", current_user_tribe: true do
     if gift = Gift.find_by(id: params[:accept_gift])
       if gift.accept
         flash[:message] = "Gift accepted!"
