@@ -9,6 +9,20 @@ class Resource < ActiveRecord::Base
     "stone"
   ]
 
+  HARVESTABLES = [
+    "food"
+  ]
+
+  MANUFACTURABLES = [
+    "cloth"
+  ]
+
+  MINEABLES = [
+    "iron",
+    "stone",
+    "coal"
+  ]
+
   def self.discover
     self.create(name: DISCOVERABLES.sample)
   end
