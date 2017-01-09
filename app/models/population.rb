@@ -6,7 +6,7 @@ class Population < ActiveRecord::Base
   end
 
   def density
-    total / self.tribe.land
+    (total / self.tribe.land.to_f).round(2)
   end
 
   def happiness
