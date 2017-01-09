@@ -4,7 +4,7 @@ class Messenger < ActiveRecord::Base
   belongs_to :destination, foreign_key: :destination_id, class_name: 'Tribe'
 
   def rejected?
-    self.rejected?
+    self.rejected
   end
 
   def reject
