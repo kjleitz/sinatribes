@@ -19,7 +19,7 @@
       <% @received_messengers.each do |messenger| %>
         <tr>
           <td><%= messenger.created_at %></td>
-          <td><a href="/tribes/<%= messenger.tribe %>"><%= messenger.tribe %></a></td>
+          <td><a href="/tribes/<%= messenger.tribe.slug %>"><%= messenger.tribe.name %></a></td>
           <td><%= messenger.message %></td>
           <% gift = messenger.gift %>
           <% if gift.money > 0 || gift.warriors > 0 || gift.resource %>
@@ -78,7 +78,7 @@
       <% @sent_messengers.each do |messenger| %>
         <tr>
           <td><%= messenger.created_at %></td>
-          <td><a href="/tribes/<%= messenger.destination %>"><%= messenger.destination %></a></td>
+          <td><a href="/tribes/<%= messenger.destination.slug %>"><%= messenger.destination.name %></a></td>
           <td><%= messenger.message %></td>
           <% gift = messenger.gift %>
           <% if gift.money > 0 || gift.warriors > 0 || gift.resource %>
