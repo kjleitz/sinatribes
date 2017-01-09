@@ -83,6 +83,12 @@ class Tribe < ActiveRecord::Base
     self.warriors >= amt ? self.population.update(warriors: self.warriors - amt) : false
   end
 
+  def ordain_priest
+    if has_building?("temple") && lose_resource("cloth")
+      add_priests(1)
+    end
+  end
+
   def add_priests(amt)
     self.population.update(priests: self.priests + amt)
   end
