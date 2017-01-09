@@ -91,6 +91,13 @@
               <% if gift.accepted? %>
                 <strong>Your gift has been <%= messenger.rejected? ? "rudely taken" : "accepted" %>.</strong>
               <% else %>
+                <% if messenger.rejected? %>
+                  <form action="/messengers/<%= @tribe.slug %>" method="post">
+                    <input type="hidden" name="_method" value="patch">
+                    <input type="hidden" name="reclaim_gift" value="<%= gift.id %>">
+                    <input type="submit" value="Reclaim gift">
+                  </form>
+                <% end %>
                 Your gift <%= messenger.rejected? ? "was not" : "has not yet been" %> accepted.
               <% end %>
             </td>
