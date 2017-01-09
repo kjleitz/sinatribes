@@ -61,6 +61,14 @@ class MessengersController < ApplicationController
       end
     end
 
+    if gift = Gift.find_by(id: params[:reclaim_gift])
+      if gift.accept(reclaim: true)
+        flash[:message] = "Gift reclaimed!"
+      else
+        flash[:message] = "Something went wrong. Did you already reclaim that gift? Are you getting GREEDY?"
+      end
+    end
+
     if messenger = Messenger.find_by(id: params[:reject_messenger])
       if messenger.reject
         flash[:message] = "Messenger rejected!"
@@ -68,6 +76,7 @@ class MessengersController < ApplicationController
         flash[:message] = "Something went wrong. Did you already reject that messenger? Aren't you kinda beating a dead horse? Give the guy a break. Sheesh."
       end
     end
+
     redirect to("/messengers/#{@tribe.slug}")
   end
 
