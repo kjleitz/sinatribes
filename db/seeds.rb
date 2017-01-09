@@ -85,7 +85,7 @@ citizens = Tribe.create(
 school = Building.create(
   name: "school",
   price: 300,
-  resource_amount: 1,
+  resource_amount: 2,
   resource_name: "wood"
 )
 
@@ -113,7 +113,7 @@ walls = Building.create(
 hut = Building.create(
   name: "hut",
   price: 100,
-  resource_amount: 0,
+  resource_amount: 1,
   resource_name: "food"
 )
 
@@ -124,17 +124,42 @@ town_hall = Building.create(
   resource_name: "stone"
 )
 
+factory = Building.create(
+  name: "factory",
+  price: 1500,
+  resource_amount: 5,
+  resource_name: "coal"
+)
+
+farm = Building.create(
+  name: "farm",
+  price: 300,
+  resource_amount: 1,
+  resource_name: "wood"
+)
+
+mine = Building.create(
+  name: "mine",
+  price: 1000,
+  resource_amount: 2,
+  resource_name: "stone"
+)
+
 survivors.build_building("hut")
 
 10.times { scalpers.add_resource("iron") }
 8.times { scalpers.add_resource("wood") }
 25.times { scalpers.add_resource("food") }
 30.times { scalpers.add_resource("stone") }
+15.times { scalpers.add_resource("coal") }
 6.times { scalpers.add_resource("cloth") }
 
 2.times { scalpers.add_building("school") }
 1.times { scalpers.add_building("hospital") }
 1.times { scalpers.add_building("walls") }
+1.times { scalpers.add_building("mine") }
+1.times { scalpers.add_building("factory") }
 4.times { scalpers.add_building("hut") }
 2.times { scalpers.add_building("barracks") }
 2.times { scalpers.add_building("town hall") }
+5.times { scalpers.add_building("farm") }
