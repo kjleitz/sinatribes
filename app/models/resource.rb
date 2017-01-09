@@ -2,8 +2,15 @@ class Resource < ActiveRecord::Base
   belongs_to :tribe
   belongs_to :gift
 
+  DISCOVERABLES = [
+    "iron",
+    "wood",
+    "food",
+    "stone"
+  ]
+
   def self.discover
-    self.create(name: self.all.reject { |r| r.name == "cloth" }.sample.name)
+    self.create(name: DISCOVERABLES.sample)
   end
 
 end
