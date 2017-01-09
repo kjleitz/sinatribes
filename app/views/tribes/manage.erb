@@ -77,6 +77,15 @@
   <tr>
     <td>Priests:</td>
     <td><%= @tribe.priests %></td>
+    <td>
+      <% if @tribe.has_building?("temple") %>
+        <form action="/tribes/<%= @tribe.slug %>/priests" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <input type="submit" value="Ordain a priest">
+          (1 cloth is necessary to ordain a priest)
+        </form>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td>Happiness:</td>
