@@ -46,10 +46,23 @@ class MessengersController < ApplicationController
     end
   end
 
-  get "/messengers/:slug", current_user_tribe: true do |slug|
+  get "/messengers/:slug", current_user_tribe: true do
     @received_messengers = Messenger.where(destination_id: @tribe.id)
     @sent_messengers = @tribe.messengers
     erb :"messengers/index"
+  end
+
+  patch "messengers/:slug", current_user_tribe: true do
+    if gift = Gift.find_by(id: params[:accept_gift])
+      if gift.accept
+        flash[:message] = "Gift accepted!"
+      else
+        flash[:message] = "Something went wrong. Did you already accept that gift? Are you getting GREEDY?"
+      end
+    else
+      flash[:message] = "Huh. That gift doesn't seem to exist! Isn't that weird?"
+    end
+    redirect to("/messengers/#{@tribe.slug}")
   end
 
 end
