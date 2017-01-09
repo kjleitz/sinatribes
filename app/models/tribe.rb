@@ -184,6 +184,16 @@ class Tribe < ActiveRecord::Base
     self.buildings.where(name: building_name).count
   end
 
+  def has_building?(building_name)
+    count_building(building_name) > 0
+  end
+
+  def use_building(building_name)
+    count_building(building_name).times do
+      collect_resource(self.buildings.find_by(name: building_name).use)
+    end
+  end
+
   def strength
     str_val = self.warriors + self.happiness
     str_val.to_i
