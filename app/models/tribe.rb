@@ -189,9 +189,12 @@ class Tribe < ActiveRecord::Base
   end
 
   def use_building(building_name)
-    count_building(building_name).times do
-      collect_resource(self.buildings.find_by(name: building_name).use)
+    resource = nil
+    amt = count_building(building_name).times do
+      resource = self.buildings.find_by(name: building_name).use
+      collect_resource(resource)
     end
+    [amt, resource.name]
   end
 
   def strength
