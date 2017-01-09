@@ -14,8 +14,12 @@ class Building < ActiveRecord::Base
     self.update(action: action) if action = ACTIONS[self.name]
   end
 
+  def usable?
+    !!self.action
+  end
+
   def use
-    Resource.send(self.action) if self.action
+    Resource.send(self.action) if self.usable?
     self.update(last_used) = Time.now
   end
 
