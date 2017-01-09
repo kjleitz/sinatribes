@@ -6,8 +6,8 @@ class Gift < ActiveRecord::Base
     self.accepted
   end
 
-  def accept
-    receiver = self.messenger.destination
+  def accept(reclaim: false)
+    receiver = reclaim ? self.messenger.tribe : self.messenger.destination
     receiver.add_money(self.money)
     receiver.add_warriors(self.warriors)
     receiver.collect_resource(self.resource)
