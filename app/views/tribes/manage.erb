@@ -71,6 +71,30 @@
 </table>
 
 <table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Resource Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @tribe.resources.empty? %>
+      <tr>
+        <td></td>
+        <td><em>You have no resources.</em></td>
+      </tr>
+    <% else %>
+      <% @tribe.list_resources.each do |resource_name| %>
+        <tr>
+          <td><%= @tribe.count_resource(resource_name) %></td>
+          <td><%= resource_name.capitalize %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
   <tcaption>Infrastructure</tcaption>
   <thead>
     <tr>
