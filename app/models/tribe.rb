@@ -287,6 +287,12 @@ class Tribe < ActiveRecord::Base
       raider_message = "Your raid on #{defender.name} wasn't a loss, but it wasn't a win, either. You were perfectly matched. Better strengthen your forces before attempting another."
       defender_message = "You held your own against #{defender.name}. You didn't seem to do much damage to their ranks, but they sure didn't do much to yours, either!"
 
+      self.war_messages << raider_message
+      defender.war_messages << defender_message
+
+      self.save
+      defender.save
+
       :draw
 
     when -1
