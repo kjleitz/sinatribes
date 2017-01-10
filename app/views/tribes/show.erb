@@ -13,42 +13,51 @@
   </p>
 <% end %>
 
-<table>
-  <tcaption>General</tcaption>
-  <tr>
-    <td>Religion:</td>
-    <td><%= @tribe.religion.name %></td>
-  </tr>
-  <tr>
-    <td>Land owned:</td>
-    <td><%= @tribe.land %> sq. mile<%= "s" if @tribe.land > 1 %></td>
-  </tr>
-  <tr>
-    <td>Total population:</td>
-    <td><%= @tribe.population.total %> people</td>
-  </tr>
-</table>
-
-<table>
-  <tcaption>Infrastructure</tcaption>
-  <% if @tribe.buildings.empty? %>
-    <tr>
-      <td><em>This tribe has no buildings. It's flat land and huddled people, as far as the eye can see!</em></td>
-    </tr>
-  <% else %>
+<section class="container">
+  <table>
     <thead>
       <tr>
-        <th>#</th>
-        <th>Building Type</th>
+        <th>General</th>
+        <th>Value</th>
       </tr>
     </thead>
     <tbody>
-      <% @tribe.buildings.uniq.each do |building| %>
+      <tr>
+        <td>Religion:</td>
+        <td><%= @tribe.religion.name %></td>
+      </tr>
+      <tr>
+        <td>Land owned:</td>
+        <td><%= @tribe.land %> sq. mile<%= "s" if @tribe.land > 1 %></td>
+      </tr>
+      <tr>
+        <td>Total population:</td>
+        <td><%= @tribe.population.total %> people</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Infrastructure</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @tribe.buildings.empty? %>
         <tr>
-          <td><%= @tribe.count_building(building.name) %></td>
-          <td><%= building.name.capitalize %></td>
+          <td>-</td>
+          <td><em>This tribe has no buildings. It's flat land and huddled people, as far as the eye can see!</em></td>
         </tr>
+      <% else %>
+        <% @tribe.buildings.uniq.each do |building| %>
+          <tr>
+            <td><%= @tribe.count_building(building.name) %></td>
+            <td><%= building.name.capitalize %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
-  <% end %>
-</table>
+  </table>
+</section>
