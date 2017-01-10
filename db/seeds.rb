@@ -171,3 +171,5 @@ survivors.build_building("hut")
 2.times { scalpers.add_building("town hall") }
 2.times { scalpers.add_building("temple") }
 5.times { scalpers.add_building("farm") }
+
+20.times { queens.collect_resource(Resource.discover) }
