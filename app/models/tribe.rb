@@ -312,9 +312,11 @@ class Tribe < ActiveRecord::Base
         amt.times do
           defender.collect_resource(self.resources.find_by(name: resource_name))
         end
-        res_string = ", #{amt} #{resource_name}"
-        attacker_message += res_string
-        defender_message += res_string
+        if amt > 0
+          res_string = ", #{amt} #{resource_name}"
+          attacker_message += res_string
+          defender_message += res_string
+        end
       end
 
       self.war_messages << attacker_message
