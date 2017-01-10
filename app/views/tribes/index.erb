@@ -29,7 +29,7 @@
         <td><a href="/tribes/<%= tribe.slug %>"><%= tribe.name %></a></td>
         <td><%= tribe.religion.name %></td>
         <td><a href="/users/<%= tribe.user.username %>"><%= tribe.user.username %></a></td>
-        <td><a href="/messengers/new/<%= tribe.id %>">Run a messenger</a></td>
+        <td class="no_wrap"><a href="/messengers/new/<%= tribe.id %>">Run a messenger</a></td>
       </tr>
     <% end %>
   </tbody>
