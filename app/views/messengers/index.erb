@@ -1,7 +1,8 @@
 <h1>Messenger activity for <%= @tribe.name %></h1>
 
+<h2>Visiting messengers:</h2>
+
 <table>
-  <tcaption>Visiting messengers</tcaption>
   <% if @received_messengers.empty? %>
     <tr>
       <td><em>No messengers have been sent to your tribe... in recent memory, at least.</em></td>
@@ -61,8 +62,9 @@
   <% end %>
 </table>
 
+<h2>Messengers abroad:</h2>
+
 <table>
-  <tcaption>Messengers abroad</tcaption>
   <% if @sent_messengers.empty? %>
     <tr>
       <td><em>You have not sent any messengers to other tribes. Not <strong>yet</strong>.</em></td>
