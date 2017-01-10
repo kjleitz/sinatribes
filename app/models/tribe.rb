@@ -269,8 +269,8 @@ class Tribe < ActiveRecord::Base
         res_hash
       end
 
-      attacker_message = "#{time_string} Loot from your raid on #{defender.name}: $#{trophy_money}"
-      defender_message = "#{time_string} Property lost in the raid from #{self.name}: $#{trophy_money}"
+      attacker_message = "#{time_string} Loot from your raid on #{defender.name}:<br>$#{trophy_money}"
+      defender_message = "#{time_string} Property lost in the raid from #{self.name}:<br>$#{trophy_money}"
       trophy_resource_hash.each do |resource, amt|
         res_string = ", #{amt} #{resource}"
         attacker_message += res_string
@@ -306,8 +306,8 @@ class Tribe < ActiveRecord::Base
         "stone": (0.9 * self.count_resource("stone")).to_i
       }
 
-      attacker_message = "#{time_string} Lives and property lost from your unsuccessful raid on #{defender.name}: #{casualties} warriors with wives and children"
-      defender_message = "#{time_string} Loot collected from the battlefield after your wildly successful defense against #{self.name}: #{casualties} still-dripping skulls of your enemies"
+      attacker_message = "#{time_string} Lives and property lost from your unsuccessful raid on #{defender.name}:<br>#{casualties} warriors with wives and children"
+      defender_message = "#{time_string} Loot collected from the battlefield after your wildly successful defense against #{self.name}:<br>#{casualties} still-dripping skulls of your enemies"
 
       dropped_resource_hash.each do |resource_name, amt|
         amt.times do
