@@ -93,7 +93,7 @@ class TribesController < ApplicationController
     redirect to("/tribes/#{slug}/manage")
   end
 
-  patch "/tribes/:slug/warriors", current_user_tribe: true do |slug|
+  patch "/tribes/:slug/farmers", current_user_tribe: true do |slug|
     amt = params[:amount].to_i
     if @tribe.invite_farmers(amt)
       flash[:message] = "Successfully invited #{amt} farmer#{"s" if amt > 1}. They seem... nice."
