@@ -45,11 +45,14 @@ div.tables {
 }
 
 table {
-  max-width: 50%;
   margin: 1em;
   border: 2px solid #777;
   border-collapse: collapse;
   font-size: 0.9em;
+}
+
+.container table {
+  max-width: 50%;
 }
 
 th {
