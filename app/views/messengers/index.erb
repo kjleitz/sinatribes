@@ -88,17 +88,19 @@
               <%= "#{gift.warriors} warrior#{"s" if gift.warriors > 1}" if gift.warriors > 0 %>
               <%= "|" if (gift.money > 0 || gift.warriors > 0) && gift.resource %>
               <%= gift.resource.name.capitalize if gift.resource %>
-              <% if gift.accepted? %>
+              <% if gift.reclaimed? %>
+                <em>(you have reclaimed this gift)</em>
+              <% elsif gift.accepted? %>
                 <strong>(your gift has been <%= messenger.rejected? ? "rudely taken" : "accepted" %>)</strong>
+              <% elsif messenger.rejected? %>
+                <form action="/messengers/<%= @tribe.slug %>" method="post">
+                  <input type="hidden" name="_method" value="patch">
+                  <input type="hidden" name="reclaim_gift" value="<%= gift.id %>">
+                  <input type="submit" value="Reclaim gift">
+                </form>
+                (gift was not accepted)
               <% else %>
-                <% if messenger.rejected? %>
-                  <form action="/messengers/<%= @tribe.slug %>" method="post">
-                    <input type="hidden" name="_method" value="patch">
-                    <input type="hidden" name="reclaim_gift" value="<%= gift.id %>">
-                    <input type="submit" value="Reclaim gift">
-                  </form>
-                <% end %>
-                (gift <%= messenger.rejected? ? "was not" : "has yet to be" %> accepted)
+                (gift has yet to be accepted)
               <% end %>
             </td>
           <% else %>
