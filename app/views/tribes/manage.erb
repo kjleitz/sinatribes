@@ -7,7 +7,6 @@
   <tr>
     <td>Name:</td>
     <td><%= @tribe.name %></td>
-    <td></td>
   </tr>
   <tr>
     <td>Land:</td>
@@ -59,16 +58,16 @@
   <tr>
     <td>Warriors:</td>
     <td><%= @tribe.warriors %></td>
-    <td>
-      <% if @tribe.has_building?("barracks") %>
+    <% if @tribe.has_building?("barracks") %>
+      <td>
         <form action="/tribes/<%= @tribe.slug %>/warriors" method="post">
           <input type="hidden" name="_method" value="patch">
           <input type="number" name="amount">
           <input type="submit" value="Enlist warriors">
           <em>($<%= @warrior_price %>/warrior)</em>
         </form>
-      <% end %>
-    </td>
+      </td>
+    <% end %>
   </tr>
   <tr>
     <td>Farmers:</td>
@@ -85,15 +84,15 @@
   <tr>
     <td>Priests:</td>
     <td><%= @tribe.priests %></td>
-    <td>
-      <% if @tribe.has_building?("temple") %>
+    <% if @tribe.has_building?("temple") %>
+      <td>
         <form action="/tribes/<%= @tribe.slug %>/priests" method="post">
           <input type="hidden" name="_method" value="patch">
           <input type="submit" value="Ordain a priest">
           <em>(1 cloth/priest)</em>
         </form>
-      <% end %>
-    </td>
+      </td>
+    <% end %>
   </tr>
   <tr>
     <td>Happiness:</td>
@@ -132,7 +131,6 @@
     <tr>
       <th>#</th>
       <th>Building Type</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -140,22 +138,21 @@
       <tr>
         <td></td>
         <td><em>You have no buildings.</em></td>
-        <td></td>
       </tr>
     <% else %>
       <% @tribe.buildings.uniq.each do |building| %>
         <tr>
           <td><%= @tribe.count_building(building.name) %></td>
           <td><%= building.name %></td>
-          <td>
-            <% if building.usable? %>
+          <% if building.usable? %>
+            <td>
               <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
                 <input type="hidden" name="_method" value="patch">
                 <input type="hidden" name="building_name" value="<%= building.name %>">
                 <input type="submit" value="<%= building.action.capitalize %>">
               </form>
-            <% end %>
-          </td>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     <% end %>
