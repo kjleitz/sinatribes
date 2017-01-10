@@ -249,6 +249,26 @@ class Tribe < ActiveRecord::Base
   def raid(defender)
     case rand(attack) <=> rand(defender.defense)
     when 1
+      trophy_money = defender.money / 2
+      add_money(trophy_money)
+      defender.lose_money(trophy_money)
+
+      trophy_resources = defender.resources.sample(defender.resources.count / 4)
+      trophy_resources.each { |resource| collect_resource(resource) }
+      trophy_resource_hash = trophy_resources.uniq.inject({}) do |res_hash, resource|
+        name = resource.name
+        res_hash[name] = trophy_resources.count { |res| res.name = name }
+        res_hash
+      end
+
+      trophy_message = "Loot from your raid on #{defender.name}: $#{trophy_money}"
+      trophy_resource_hash.each do |resource, amt|
+        trophy_message += ", #{amt} #{resource}"
+      end
+
+      self.war_messages << trophy_message
+      self.save
+
       :win
     when 0
       :draw
