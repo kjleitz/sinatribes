@@ -73,43 +73,43 @@ class TribesController < ApplicationController
     redirect to("/tribes/#{slug}/manage")
   end
 
+  def purchase_amt_and_manage(success, failure, purch_method, amt=nil)
+    if amt && amt < 0
+      flash[:message] = "Not to be negative, but... no negatives."
+    elsif amt && amt == 0
+      flash[:message] = "Good job. You got... nothing for your troubles. That was a sarcastic 'good job', if you couldn't tell."
+    else
+      purchased = amt ? @tribe.send(purch_method, amt.to_i) : @tribe.send(purch_method)
+      flash[:message] = purchased ? success : failure
+    end
+    redirect to("/tribes/#{params[:slug]}/manage")
+  end
+
   patch "/tribes/:slug/land", current_user_tribe: true do |slug|
     amt = params[:amount].to_i
-    if @tribe.buy_land(amt)
-      flash[:message] = "Successfully purchased #{amt} square mile#{"s" if amt > 1} of land!"
-    else
-      flash[:message] = "You cannot afford that amount of land."
-    end
-    redirect to("/tribes/#{slug}/manage")
+    success = "Successfully purchased #{amt} square mile#{"s" if amt > 1} of land!"
+    failure = "You cannot afford that amount of land."
+    purchase_amt_and_manage(success, failure, :buy_land, amt)
   end
 
   patch "/tribes/:slug/warriors", current_user_tribe: true do |slug|
     amt = params[:amount].to_i
-    if @tribe.enlist_warriors(amt)
-      flash[:message] = "Successfully enlisted #{amt} warrior#{"s" if amt > 1}. Feelin' strong!"
-    else
-      flash[:message] = "You cannot afford that many warriors."
-    end
-    redirect to("/tribes/#{slug}/manage")
+    success = "Successfully enlisted #{amt} warrior#{"s" if amt > 1}. Feelin' strong!"
+    failure = "You cannot afford that many warriors."
+    purchase_amt_and_manage(success, failure, :enlist_warriors, amt)
   end
 
   patch "/tribes/:slug/farmers", current_user_tribe: true do |slug|
     amt = params[:amount].to_i
-    if @tribe.invite_farmers(amt)
-      flash[:message] = "Successfully invited #{amt} farmer#{"s" if amt > 1}. They seem... nice."
-    else
-      flash[:message] = "You need one hut for every ten farmers. Who wants to tend livestock when you're squished together like... Ahem."
-    end
-    redirect to("/tribes/#{slug}/manage")
+    success = "Successfully invited #{amt} farmer#{"s" if amt > 1}. They seem... nice."
+    failure = "You need one hut for every ten farmers. Who wants to tend livestock when you're squished together like... Ahem."
+    purchase_amt_and_manage(success, failure, :invite_farmers, amt)
   end
 
   patch "/tribes/:slug/priests", current_user_tribe: true do |slug|
-    if @tribe.ordain_priest
-      flash[:message] = "Successfully ordained a priest. Nobody's holier than thou!"
-    else
-      flash[:message] = "Priests are men of the cloth... one cloth, specifically. Try again when you have some."
-    end
-    redirect to("/tribes/#{slug}/manage")
+    success = "Successfully ordained a priest. Nobody's holier than thou!"
+    failure = "Priests are men of the cloth... one cloth, specifically. Try again when you have some."
+    purchase_amt_and_manage(success, failure, :ordain_priest)
   end
 
   delete "/tribes/:slug/delete", current_user_tribe: true do |slug|
