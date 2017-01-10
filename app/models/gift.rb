@@ -20,7 +20,7 @@ class Gift < ActiveRecord::Base
       receiver.add_money(self.money)
       receiver.add_warriors(self.warriors)
       receiver.collect_resource(self.resource) if self.resource
-      reclaim ? self.update(accepted: true) : self.update(reclaimed: true)
+      reclaim ? self.update(reclaimed: true) : self.update(accepted: true)
     end
   end
 
