@@ -2,6 +2,7 @@ class Tribe < ActiveRecord::Base
 
   extend Slugifiable::ClassMethods
   include Slugifiable::InstanceMethods
+  include Formatter
 
   belongs_to :user
   belongs_to :religion
