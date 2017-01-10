@@ -4,105 +4,132 @@
 
 <table id="general">
   <tcaption>General</tcaption>
-  <tr>
-    <td>Name:</td>
-    <td><%= @tribe.name %></td>
-    <td class="input_col"></td>
-  </tr>
-  <tr>
-    <td>Land:</td>
-    <td><%= @tribe.land %> square mile<%= "s" if @tribe.land > 1 %></td>
-    <td class="input_col">
-      <form action="/tribes/<%= @tribe.slug %>/land" method="post">
-        <input type="hidden" name="_method" value="patch">
-        <input type="number" name="amount">
-        <input type="submit" value="Buy">
-        <em>($<%= @land_price %>/mi<sup>2</sup>)</em>
-      </form>
-    </td>
-  </tr>
-  <tr>
-    <td>Technology:</td>
-    <td><%= @tribe.technology %></td>
-    <td class="input_col"></td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Descriptor</th>
+      <th>Value</th>
+      <th>Interaction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name:</td>
+      <td><%= @tribe.name %></td>
+      <td class="input_col"></td>
+    </tr>
+    <tr>
+      <td>Land:</td>
+      <td><%= @tribe.land %> square mile<%= "s" if @tribe.land > 1 %></td>
+      <td class="input_col">
+        <form action="/tribes/<%= @tribe.slug %>/land" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <input type="number" name="amount">
+          <input type="submit" value="Buy">
+          <em>($<%= @land_price %>/mi<sup>2</sup>)</em>
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <td>Technology:</td>
+      <td><%= @tribe.technology %></td>
+      <td class="input_col"></td>
+    </tr>
+  </tbody>
 </table>
 
 <table id="finances">
   <tcaption>Finances</tcaption>
-  <tr>
-    <td>Tribe net worth:</td>
-    <td>$<%= @tribe.money %></td>
-    <td class="input_col"></td>
-  </tr>
-  <tr>
-    <td>Collectible taxes:</td>
-    <td>$<%= @tribe.population.taxes %></td>
-    <td class="input_col">
-      <form action="/tribes/<%= @tribe.slug %>/taxes" method="post">
-        <input type="hidden" name="_method" value="patch">
-        <input type="submit" value="Collect">
-      </form>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Descriptor</th>
+      <th>Value</th>
+      <th>Interaction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tribe net worth:</td>
+      <td>$<%= @tribe.money %></td>
+      <td class="input_col"></td>
+    </tr>
+    <tr>
+      <td>Collectible taxes:</td>
+      <td>$<%= @tribe.population.taxes %></td>
+      <td class="input_col">
+        <form action="/tribes/<%= @tribe.slug %>/taxes" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <input type="submit" value="Collect">
+        </form>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <table id="census">
   <tcaption>Census</tcaption>
-  <tr>
-    <td>Total population:</td>
-    <td><%= @tribe.population.total %></td>
-    <td class="input_col"></td>
-  </tr>
-  <tr>
-    <td>Population density:</td>
-    <td><%= @tribe.population.density %>/mi<sup>2</sup></td>
-    <td class="input_col"></td>
-  </tr>
-  <tr>
-    <td>Warriors:</td>
-    <td><%= @tribe.warriors %></td>
-    <td class="input_col">
-      <% if @tribe.has_building?("barracks") %>
-        <form action="/tribes/<%= @tribe.slug %>/warriors" method="post">
+  <thead>
+    <tr>
+      <th>Descriptor</th>
+      <th>Value</th>
+      <th>Interaction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Total population:</td>
+      <td><%= @tribe.population.total %></td>
+      <td class="input_col"></td>
+    </tr>
+    <tr>
+      <td>Population density:</td>
+      <td><%= @tribe.population.density %>/mi<sup>2</sup></td>
+      <td class="input_col"></td>
+    </tr>
+    <tr>
+      <td>Warriors:</td>
+      <td><%= @tribe.warriors %></td>
+      <td class="input_col">
+        <% if @tribe.has_building?("barracks") %>
+          <form action="/tribes/<%= @tribe.slug %>/warriors" method="post">
+            <input type="hidden" name="_method" value="patch">
+            <input type="number" name="amount">
+            <input type="submit" value="Enlist warriors">
+            <em>($<%= @warrior_price %>/warrior)</em>
+          </form>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>Farmers:</td>
+      <td><%= @tribe.farmers %></td>
+      <td class="input_col">
+        <form action="/tribes/<%= @tribe.slug %>/farmers" method="post">
           <input type="hidden" name="_method" value="patch">
           <input type="number" name="amount">
-          <input type="submit" value="Enlist warriors">
-          <em>($<%= @warrior_price %>/warrior)</em>
+          <input type="submit" value="Invite farmers">
+          <em>(1 hut needed for every 10 farmers)</em>
         </form>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td>Farmers:</td>
-    <td><%= @tribe.farmers %></td>
-    <td class="input_col">
-      <form action="/tribes/<%= @tribe.slug %>/farmers" method="post">
-        <input type="hidden" name="_method" value="patch">
-        <input type="number" name="amount">
-        <input type="submit" value="Invite farmers">
-        <em>(1 hut needed for every 10 farmers)</em>
-      </form>
-    </td>
-  </tr>
-  <tr>
-    <td>Priests:</td>
-    <td><%= @tribe.priests %></td>
-    <td class="input_col">
-      <% if @tribe.has_building?("temple") %>
-        <form action="/tribes/<%= @tribe.slug %>/priests" method="post">
-          <input type="hidden" name="_method" value="patch">
-          <input type="submit" value="Ordain a priest">
-          <em>(1 cloth/priest)</em>
-        </form>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td>Happiness:</td>
-    <td><%= @tribe.happiness %></td>
-    <td class="input_col"></td>
-  </tr>
+      </td>
+    </tr>
+    <tr>
+      <td>Priests:</td>
+      <td><%= @tribe.priests %></td>
+      <td class="input_col">
+        <% if @tribe.has_building?("temple") %>
+          <form action="/tribes/<%= @tribe.slug %>/priests" method="post">
+            <input type="hidden" name="_method" value="patch">
+            <input type="submit" value="Ordain a priest">
+            <em>(1 cloth/priest)</em>
+          </form>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>Happiness:</td>
+      <td><%= @tribe.happiness %></td>
+      <td class="input_col"></td>
+    </tr>
+  </tbody>
 </table>
 
 <table id="resources">
