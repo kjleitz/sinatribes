@@ -135,6 +135,11 @@ class TribesController < ApplicationController
     redirect to("/")
   end
 
+  delete "/tribes/:slug/war_messages", current_user_tribe: true do |slug|
+    self.war_messages.clear
+    flash[:message] = "We've always been at war with Eastasia."
+  end
+
   def not_your_tribe
     flash[:message] = "This is not your tribe. Why are you trying to do that?"
     redirect to("/tribes/#{params[:slug]}")
