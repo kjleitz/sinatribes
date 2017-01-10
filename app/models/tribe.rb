@@ -21,6 +21,7 @@ class Tribe < ActiveRecord::Base
   TAX_WAIT_PERIOD = 300
   LAND_PRICE = 100
   WARRIOR_PRICE = 50
+  FARMERS_PER_HUT = 10
 
   def initialize(args)
     super
@@ -81,6 +82,14 @@ class Tribe < ActiveRecord::Base
 
   def lose_warriors(amt)
     self.warriors >= amt ? self.population.update(warriors: self.warriors - amt) : false
+  end
+
+  def max_farmers
+    FARMERS_PER_HUT * count_building("hut")
+  end
+
+  def invite_farmers(amt)
+    add_farmers(amt) if (self.farmers + amt) < max_farmers
   end
 
   def add_farmers(amt)
