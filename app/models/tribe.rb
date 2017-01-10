@@ -234,7 +234,7 @@ class Tribe < ActiveRecord::Base
     str_val.to_i
   end
 
-  def defend
+  def defense
     def_val = strength * (1 + count_building("walls")) * (1 + count_building("barracks") * 0.5)
     def_val *= 10 if self.priests > (self.population.total * 0.5)
     def_val.to_i
