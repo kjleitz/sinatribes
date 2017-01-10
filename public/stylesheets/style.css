@@ -7,7 +7,6 @@ body {
 }
 
 main {
-  background-color: #bbc;
   height: 100%;
   margin: 0;
   padding: 1.5em;
@@ -22,6 +21,12 @@ h1, h2 {
   font-weight: 500;
 }
 
+div.tables {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -29,6 +34,7 @@ h1, h2 {
 }
 
 table {
+  max-width: 50%;
   margin: 1em;
   border: 2px solid #777;
   border-collapse: collapse;
