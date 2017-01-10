@@ -212,30 +212,37 @@
 
 <section class="container">
   <table id="military">
-    <tcaption>Military</tcaption>
-    <tr>
-      <td>Offensive strength:</td>
-      <td><%= @tribe.attack %></td>
-    </tr>
-    <tr>
-      <td>Defensive strength:</td>
-      <td><%= @tribe.defense %></td>
-    </tr>
-    <tr>
-      <td>War messages:</td>
-      <td>
-        <% if @tribe.war_messages.empty? %>
-          <em>Your tribe has not been involved in any conflicts in recent memory.</em>
-        <% else %>
-          <% @tribe.war_messages.reverse.each do |message| %>
-            <%= message %><br>
+    <thead>
+      <tr>
+        <th>Military</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Offensive strength:</td>
+        <td><%= @tribe.attack %></td>
+      </tr>
+      <tr>
+        <td>Defensive strength:</td>
+        <td><%= @tribe.defense %></td>
+      </tr>
+      <tr>
+        <td>War messages:</td>
+        <td>
+          <% if @tribe.war_messages.empty? %>
+            <em>Your tribe has not been involved in any conflicts in recent memory.</em>
+          <% else %>
+            <% @tribe.war_messages.reverse.each do |message| %>
+              <%= message %><br>
+            <% end %>
+            <form action="/tribes/<%= @tribe.slug %>/war_messages" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <input type="submit" value="Clear messages">
+            </form>
           <% end %>
-          <form action="/tribes/<%= @tribe.slug %>/war_messages" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <input type="submit" value="Clear messages">
-          </form>
-        <% end %>
-      </td>
-    </tr>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </section>
