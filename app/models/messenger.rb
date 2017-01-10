@@ -20,4 +20,8 @@ class Messenger < ActiveRecord::Base
   def give_message(msg)
     self.update(message: msg)
   end
+
+  def created_at_formatted
+    format_time(self.created_at, true)
+  end
 end
