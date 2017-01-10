@@ -3,11 +3,11 @@ body {
   font-weight: 300;
   max-width: 50em;
   margin: 5em auto 5em auto;
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
 }
 
 main {
-  background-color: #BBC;
+  background-color: #bbc;
   height: 100%;
   margin: 0;
   padding: 1.5em;
@@ -25,6 +25,7 @@ h1, h2 {
 table {
   font-size: 0.9em;
   border: 2px solid #777;
+  background-color: #e0e0e0;
 }
 
 th {
