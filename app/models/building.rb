@@ -17,7 +17,7 @@ class Building < ActiveRecord::Base
   end
 
   def initialize_used_time
-    self.update(last_used: Time.now) unless self.last_used
+    self.update(last_used: Time.now - BUILDING_WAIT_PERIOD) unless self.last_used
   end
 
   def usable?
