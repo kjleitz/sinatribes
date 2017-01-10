@@ -112,6 +112,12 @@ class TribesController < ApplicationController
     purchase_amt_and_manage(success, failure, :ordain_priest)
   end
 
+  patch "/tribes/:slug/raid", current_user_tribe: false do |slug|
+    attacker = current_user.tribe
+    defender = Tribe.find_by_slug(slug)
+    attacker.raid(defender)
+  end
+
   delete "/tribes/:slug/delete", current_user_tribe: true do |slug|
     if @tribe.destroy
       flash[:message] = "Successfully deleted \"#{@tribe.name}\"."
