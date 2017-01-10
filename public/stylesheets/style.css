@@ -1,13 +1,21 @@
-strong {
-  font-weight: 500;
-}
-
 body {
   font-family: Roboto, sans-serif;
   font-weight: 300;
   max-width: 50em;
   margin: 5em auto 5em auto;
   background-color: #E0E0E0;
+}
+
+main {
+  background-color: #BBC;
+  height: 100%;
+  margin: 0;
+  padding: 1.5em;
+  border-radius: 0 0 1em 1em;
+}
+
+strong {
+  font-weight: 500;
 }
 
 h1, h2 {
