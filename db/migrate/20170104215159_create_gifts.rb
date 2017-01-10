@@ -4,6 +4,7 @@ class CreateGifts < ActiveRecord::Migration[5.0]
       t.integer :money, default: 0
       t.integer :warriors, default: 0
       t.boolean :accepted, default: false
+      t.boolean :reclaimed, default: false
       t.integer :messenger_id
     end
   end
