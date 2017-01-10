@@ -136,8 +136,10 @@ class TribesController < ApplicationController
   end
 
   delete "/tribes/:slug/war_messages", current_user_tribe: true do |slug|
-    self.war_messages.clear
+    @tribe.war_messages.clear
+    @tribe.save
     flash[:message] = "We've always been at war with Eastasia."
+    redirect to("/tribes/#{slug}/manage")
   end
 
   def not_your_tribe
