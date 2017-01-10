@@ -5,6 +5,12 @@
   <p>View your tribe's <a href="/messengers/<%= @tribe.slug %>">messenger activity</a>.</p>
 <% else %>
   <p>Run a <a href="/messengers/new/<%= @tribe.id %>">messenger</a> to this tribe!</p>
+  <p>
+    <form action="/tribes/<%= @tribe.slug %>/raid" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <input type="submit" name="attack" value="Attempt to raid tribe">
+    </form>
+  </p>
 <% end %>
 
 <table>
