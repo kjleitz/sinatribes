@@ -46,6 +46,10 @@ td.input_col {
   border: none;
 }
 
+td.input_col form {
+  font-size: 0.8em;
+}
+
 td:first-child {
   text-align: right;
 }
