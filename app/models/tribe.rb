@@ -253,6 +253,7 @@ class Tribe < ActiveRecord::Base
   end
 
   def raid(defender)
+    time_string = "<em>[#{Time.now}]:</em>"
     case rand(attack) <=> rand(defender.defense)
     when 1
       trophy_money = defender.money / 2
@@ -267,8 +268,8 @@ class Tribe < ActiveRecord::Base
         res_hash
       end
 
-      attacker_message = "Loot from your raid on #{defender.name}: $#{trophy_money}"
-      defender_message = "Property lost in the raid from #{self.name}: $#{trophy_money}"
+      attacker_message = "#{time_string} Loot from your raid on #{defender.name}: $#{trophy_money}"
+      defender_message = "#{time_string} Property lost in the raid from #{self.name}: $#{trophy_money}"
       trophy_resource_hash.each do |resource, amt|
         res_string = ", #{amt} #{resource}"
         attacker_message += res_string
@@ -284,8 +285,8 @@ class Tribe < ActiveRecord::Base
       :win
 
     when 0
-      attacker_message = "Your raid on #{defender.name} wasn't a loss, but it wasn't a win, either. You were perfectly matched. Better strengthen your forces before attempting another."
-      defender_message = "You held your own against #{defender.name}. You didn't seem to do much damage to their ranks, but they sure didn't do much to yours, either!"
+      attacker_message = "#{time_string} Your raid on #{defender.name} wasn't a loss, but it wasn't a win, either. You were perfectly matched. Better strengthen your forces before attempting another."
+      defender_message = "#{time_string} You held your own against #{defender.name}. You didn't seem to do much damage to their ranks, but they sure didn't do much to yours, either!"
 
       self.war_messages << attacker_message
       defender.war_messages << defender_message
@@ -304,8 +305,8 @@ class Tribe < ActiveRecord::Base
         "stone": (0.9 * self.count_resource("stone")).to_i
       }
 
-      attacker_message = "Lives and property lost from your unsuccessful raid on #{defender.name}: #{casualties} warriors with wives and children"
-      defender_message = "Loot collected from the battlefield after your wildly successful defense against #{self.name}: #{casualties} still-dripping skulls of your enemies"
+      attacker_message = "#{time_string} Lives and property lost from your unsuccessful raid on #{defender.name}: #{casualties} warriors with wives and children"
+      defender_message = "#{time_string} Loot collected from the battlefield after your wildly successful defense against #{self.name}: #{casualties} still-dripping skulls of your enemies"
 
       dropped_resource_hash.each do |resource_name, amt|
         amt.times do
