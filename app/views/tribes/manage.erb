@@ -192,7 +192,7 @@
     <td>War messages:</td>
     <td>
       <% if @tribe.war_messages.empty? %>
-        <em>Your tribe has not been involved in any conflicts.</em>
+        <em>Your tribe has not been involved in any conflicts in recent memory.</em>
       <% else %>
         <% @tribe.war_messages.reverse.each do |message| %>
           <%= message %><br>
