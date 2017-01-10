@@ -11,7 +11,7 @@ class Gift < ActiveRecord::Base
   end
 
   def accept(reclaim: false)
-    unless accepted?
+    unless accepted? || reclaimed?
       receiver = reclaim ? self.messenger.tribe : self.messenger.destination
       receiver.add_money(self.money)
       receiver.add_warriors(self.warriors)
