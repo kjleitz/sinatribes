@@ -1,4 +1,7 @@
 class Messenger < ActiveRecord::Base
+
+  include Formatter
+
   has_one :gift
   belongs_to :tribe
   belongs_to :destination, foreign_key: :destination_id, class_name: 'Tribe'
