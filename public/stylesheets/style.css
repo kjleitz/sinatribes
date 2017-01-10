@@ -76,6 +76,11 @@ td.input_col form {
 
 td:first-child {
   text-align: right;
+  vertical-align: top;
+}
+
+.no_wrap {
+  white-space: nowrap;
 }
 
 input[type="number"] {
