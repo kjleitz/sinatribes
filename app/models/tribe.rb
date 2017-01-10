@@ -246,7 +246,7 @@ class Tribe < ActiveRecord::Base
   end
 
   def raid(defender)
-    case rand(attack) <=> rand(defender.defend)
+    case rand(attack) <=> rand(defender.defense)
     when 1
       :win
     when 0
