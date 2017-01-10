@@ -8,6 +8,7 @@ class CreateTribes < ActiveRecord::Migration[5.0]
       t.timestamp :last_tax_collection
       t.integer :user_id
       t.integer :religion_id
+      t.text :war_messages
       t.timestamps
     end
   end
