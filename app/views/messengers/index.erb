@@ -19,7 +19,7 @@
     <tbody>
       <% @received_messengers.each do |messenger| %>
         <tr>
-          <td><%= messenger.created_at_formatted %></td>
+          <td class="no_wrap"><%= messenger.created_at_formatted %></td>
           <td><a href="/tribes/<%= messenger.tribe.slug %>"><%= messenger.tribe.name %></a></td>
           <td><%= messenger.message %><br><a href="/messengers/new/<%= messenger.tribe.id %>">[reply]</a></td>
           <% gift = messenger.gift %>
@@ -30,6 +30,7 @@
               <%= "#{gift.warriors} warrior#{"s" if gift.warriors > 1}" if gift.warriors > 0 %>
               <%= "|" if gift.warriors > 0 && gift.resource %>
               <%= gift.resource.name.capitalize if gift.resource %>
+              <br>
               <% if gift.accepted? %>
                 <strong>(gift accepted)</strong>
               <% elsif !messenger.rejected? && !gift.claimed? %>
@@ -79,7 +80,7 @@
     <tbody>
       <% @sent_messengers.each do |messenger| %>
         <tr>
-          <td><%= messenger.created_at_formatted %></td>
+          <td class="no_wrap"><%= messenger.created_at_formatted %></td>
           <td><a href="/tribes/<%= messenger.destination.slug %>"><%= messenger.destination.name %></a></td>
           <td><%= messenger.message %></td>
           <% gift = messenger.gift %>
@@ -90,6 +91,7 @@
               <%= "#{gift.warriors} warrior#{"s" if gift.warriors > 1}" if gift.warriors > 0 %>
               <%= "|" if gift.warriors > 0 && gift.resource %>
               <%= gift.resource.name.capitalize if gift.resource %>
+              <br>
               <% if gift.reclaimed? %>
                 <em>(you have reclaimed this gift)</em>
               <% elsif gift.accepted? %>
