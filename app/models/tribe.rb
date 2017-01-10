@@ -245,4 +245,15 @@ class Tribe < ActiveRecord::Base
     atk_val.to_i
   end
 
+  def raid(defender)
+    case rand(attack) <=> rand(defender.defend)
+    when 1
+      :win
+    when 0
+      :draw
+    when -1
+      :loss
+    end
+  end
+
 end
