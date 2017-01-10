@@ -31,7 +31,7 @@
               <%= gift.resource.name.capitalize if gift.resource %>
               <% if gift.accepted? %>
                 <strong>(gift accepted)</strong>
-              <% elsif !messenger.rejected? %>
+              <% elsif !messenger.rejected? && !gift.claimed? %>
                 <form action="/messengers/<%= @tribe.slug %>" method="post">
                   <input type="hidden" name="_method" value="patch">
                   <input type="hidden" name="accept_gift" value="<%= gift.id %>">
@@ -86,7 +86,7 @@
               <%= "$#{gift.money}" if gift.money > 0 %>
               <%= "|" if gift.money > 0 && (gift.warriors > 0 || gift.resource) %>
               <%= "#{gift.warriors} warrior#{"s" if gift.warriors > 1}" if gift.warriors > 0 %>
-              <%= "|" if (gift.money > 0 || gift.warriors > 0) && gift.resource %>
+              <%= "|" if gift.warriors > 0 && gift.resource %>
               <%= gift.resource.name.capitalize if gift.resource %>
               <% if gift.reclaimed? %>
                 <em>(you have reclaimed this gift)</em>
