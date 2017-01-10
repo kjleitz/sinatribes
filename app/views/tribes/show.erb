@@ -16,6 +16,10 @@
 <table>
   <tcaption>General</tcaption>
   <tr>
+    <td>Religion:</td>
+    <td><%= @tribe.religion.name %></td>
+  </tr>
+  <tr>
     <td>Land owned:</td>
     <td><%= @tribe.land %> sq. mile<%= "s" if @tribe.land > 1 %></td>
   </tr>
@@ -29,7 +33,6 @@
   <tcaption>Infrastructure</tcaption>
   <% if @tribe.buildings.empty? %>
     <tr>
-      <td></td>
       <td><em>This tribe has no buildings. It's flat land and huddled people, as far as the eye can see!</em></td>
     </tr>
   <% else %>
