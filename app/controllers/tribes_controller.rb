@@ -54,10 +54,11 @@ class TribesController < ApplicationController
 
   patch "/tribes/:slug/buildings", current_user_tribe: true do |slug|
     amt, resource_name = @tribe.use_building(params[:building_name])
-    if amt > 0
+    if !resource_name.empty?
       flash[:message] = "Obtained #{amt} #{resource_name}!"
     else
-      flash[:message] = "You can't collect resources from this building."
+      building_time = Building::BUILDING_WAIT_PERIOD - (Time.now - @tribe.buildings.find_by(name: params[:building_name]).last_used)
+      flash[:message] = "You need to wait #{building_time.to_i} seconds until you can use this building again."
     end
     redirect to("/tribes/#{slug}/manage")
   end
