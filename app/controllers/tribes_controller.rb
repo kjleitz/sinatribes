@@ -75,7 +75,7 @@ class TribesController < ApplicationController
 
   patch "/tribes/:slug/land", current_user_tribe: true do |slug|
     amt = params[:amount].to_i
-    if @tribe.buy_land(amt.to_i)
+    if @tribe.buy_land(amt)
       flash[:message] = "Successfully purchased #{amt} square mile#{"s" if amt > 1} of land!"
     else
       flash[:message] = "You cannot afford that amount of land."
@@ -85,10 +85,20 @@ class TribesController < ApplicationController
 
   patch "/tribes/:slug/warriors", current_user_tribe: true do |slug|
     amt = params[:amount].to_i
-    if @tribe.enlist_warriors(amt.to_i)
+    if @tribe.enlist_warriors(amt)
       flash[:message] = "Successfully enlisted #{amt} warrior#{"s" if amt > 1}. Feelin' strong!"
     else
       flash[:message] = "You cannot afford that many warriors."
+    end
+    redirect to("/tribes/#{slug}/manage")
+  end
+
+  patch "/tribes/:slug/warriors", current_user_tribe: true do |slug|
+    amt = params[:amount].to_i
+    if @tribe.invite_farmers(amt)
+      flash[:message] = "Successfully invited #{amt} farmer#{"s" if amt > 1}. They seem... nice."
+    else
+      flash[:message] = "You need one hut for every ten farmers. Who wants to tend livestock when you're squished together like... Ahem."
     end
     redirect to("/tribes/#{slug}/manage")
   end
