@@ -10,8 +10,12 @@ class Gift < ActiveRecord::Base
     self.reclaimed
   end
 
+  def claimed?
+    accepted? || reclaimed?
+  end
+
   def accept(reclaim: false)
-    unless accepted? || reclaimed?
+    unless claimed?
       receiver = reclaim ? self.messenger.tribe : self.messenger.destination
       receiver.add_money(self.money)
       receiver.add_warriors(self.warriors)
