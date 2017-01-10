@@ -253,7 +253,7 @@ class Tribe < ActiveRecord::Base
   end
 
   def raid(defender)
-    time_string = "<em>[#{Time.now}]:</em>"
+    time_string = "<em>[#{format_time(Time.now)}]:</em>"
     case rand(attack) <=> rand(defender.defense)
     when 1
       trophy_money = defender.money / 2
