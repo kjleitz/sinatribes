@@ -3,6 +3,7 @@ class Building < ActiveRecord::Base
   has_many :tribes, through: :tribe_buildings
 
   after_create :initialize_action
+  after_create :initialize_used_time
 
   BUILDING_WAIT_PERIOD = 300
   ACTIONS = {
