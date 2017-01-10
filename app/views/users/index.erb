@@ -3,6 +3,15 @@
 <% if @user.tribes %>
   <table>
     <tcaption>Your tribes:</tcaption>
+    <thead>
+      <tr>
+        <th>Management Page</th>
+        <th>Tribe Name</th>
+        <th>View Messenger Activity</th>
+        <th>Active Tribe</th>
+        <th>Delete Tribe<br><em>(Warning! Permanent!)</em></th>
+      </tr>
+    </thead>
     <tfoot>
       <tr>
         <td>
@@ -17,8 +26,8 @@
     <tbody>
       <% @user.tribes.each do |tribe| %>
         <tr>
+          <td><a href="/tribes/<%= tribe.slug %>/manage"><strong>Manage</strong></a></td>
           <td><%= tribe.name %></td>
-          <td><a href="/tribes/<%= tribe.slug %>/manage">Manage</a></td>
           <td><a href="/messengers/<%= tribe.slug %>">Messengers</a></td>
           <td>
             <% if @user.tribe == tribe %>
@@ -34,7 +43,6 @@
             <form action="/tribes/<%= tribe.slug %>/delete" method="post">
               <input type="hidden" name="_method" value="delete">
               <input type="submit" value="Delete">
-              <em>(<strong>Warning!</strong> Deleting a tribe is permanent!)</em>
             </form>
           </td>
         </tr>
