@@ -64,7 +64,7 @@
         <form action="/tribes/<%= @tribe.slug %>/warriors" method="post">
           <input type="hidden" name="_method" value="patch">
           <input type="number" name="amount">
-          <input type="submit" value="Enlist">
+          <input type="submit" value="Enlist warriors">
           <em>($<%= @warrior_price %>/warrior)</em>
         </form>
       <% end %>
@@ -73,6 +73,14 @@
   <tr>
     <td>Farmers:</td>
     <td><%= @tribe.farmers %></td>
+    <td>
+      <form action="/tribes/<%= @tribe.slug %>/farmers" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <input type="number" name="amount">
+        <input type="submit" value="Invite farmers">
+        <em>(1 hut needed for every 10 farmers)</em>
+      </form>
+    </td>
   </tr>
   <tr>
     <td>Priests:</td>
