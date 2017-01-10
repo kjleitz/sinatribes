@@ -10,6 +10,7 @@ class Tribe < ActiveRecord::Base
   has_many :tribe_buildings
   has_many :buildings, through: :tribe_buildings
   has_many :resources
+  serialize :war_messages
 
   validates_presence_of :user
   validates_presence_of :name
@@ -17,6 +18,7 @@ class Tribe < ActiveRecord::Base
 
   after_create :initialize_tax_time
   after_create :make_active_tribe
+  after_create :initialize_war_messages
 
   TAX_WAIT_PERIOD = 300
   LAND_PRICE = 100
@@ -37,6 +39,10 @@ class Tribe < ActiveRecord::Base
 
   def make_active_tribe
     self.user.switch_active_tribe_to(self)
+  end
+
+  def initialize_war_messages
+    self.update(war_messages: [])
   end
 
   def warriors
@@ -257,21 +263,32 @@ class Tribe < ActiveRecord::Base
       trophy_resources.each { |resource| collect_resource(resource) }
       trophy_resource_hash = trophy_resources.uniq.inject({}) do |res_hash, resource|
         name = resource.name
-        res_hash[name] = trophy_resources.count { |res| res.name = name }
+        res_hash[name] = trophy_resources.count { |res| res.name == name }
         res_hash
       end
 
       trophy_message = "Loot from your raid on #{defender.name}: $#{trophy_money}"
+      loss_message = "Property lost in the raid from #{self.name}: $#{trophy_money}"
       trophy_resource_hash.each do |resource, amt|
-        trophy_message += ", #{amt} #{resource}"
+        res_string = ", #{amt} #{resource}"
+        trophy_message += res_string
+        loss_message += res_string
       end
 
       self.war_messages << trophy_message
+      defender.war_messages << loss_message
+
       self.save
+      defender.save
 
       :win
+
     when 0
+      raider_message = "Your raid on #{defender.name} wasn't a loss, but it wasn't a win, either. You were perfectly matched. Better strengthen your forces before attempting another."
+      defender_message = "You held your own against #{defender.name}. You didn't seem to do much damage to their ranks, but they sure didn't do much to yours, either!"
+
       :draw
+
     when -1
       :loss
     end
