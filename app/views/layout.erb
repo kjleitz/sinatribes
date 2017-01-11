@@ -19,7 +19,7 @@
           <a href="/tribes/<%= current_user.tribe.slug %>/manage">&nbsp&nbsp<%= current_user.tribe.name %>&nbsp&nbsp</a>
           <a href="/messengers/<%= current_user.tribe.slug %>">&nbsp&nbspMessengers&nbsp&nbsp</a>
         <% else %>
-          <a href="tribes/new">&nbsp&nbspCreate a tribe&nbsp&nbsp</a>
+          <a href="/tribes/new">&nbsp&nbspCreate a tribe&nbsp&nbsp</a>
         <% end %>
         <a href="/logout">&nbsp&nbspLog out</a>
       <% else %>
