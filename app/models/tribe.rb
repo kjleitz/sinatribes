@@ -114,8 +114,12 @@ class Tribe < ActiveRecord::Base
   end
 
   def buy_land(amt)
-    # ternary w/ false because the alt is true (style dictates false, not nil)
-     lose_money(amt * LAND_PRICE) ? add_land(amt) : false
+    if lose_money(amt * LAND_PRICE)
+      rand(amt).times { collect_resource(Resource.discover) }
+      add_land(amt)
+    else
+      false
+    end
   end
 
   def add_land(amt)
