@@ -6,6 +6,38 @@ body {
   background-color: #e0e0e0;
 }
 
+#top_bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5em;
+  background-color: #777;
+  z-index: 10;
+}
+
+#top_bar a {
+  color: #e0e0e0;
+}
+
+#top_bar a:hover {
+  color: #bbc
+}
+
+#logo {
+  float: left;
+  font-weight: 900;
+  font-size: 2em;
+}
+
+#main_nav {
+  float: right;
+}
+
+#main_nav a + a:before {
+  content: " | "
+}
+
 main {
   height: 100%;
   margin: 0;
@@ -22,6 +54,10 @@ main {
   background-color: #bbc;
   border-radius: 0 0 1em 1em;
   z-index: -1;
+}
+
+a {
+  text-decoration: none;
 }
 
 strong {
