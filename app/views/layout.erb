@@ -15,12 +15,16 @@
       <% if session[:user_id] %>
         <a href="/">Home&nbsp&nbsp</a>
         <a href="/tribes">&nbsp&nbspWorld&nbsp&nbsp</a>
-        <a href="/tribes/<%= current_user.tribe.slug %>/manage">&nbsp&nbsp<%= current_user.tribe.name %>&nbsp&nbsp</a>
-        <a href="/messengers/<%= current_user.tribe.slug %>">&nbsp&nbspMessengers&nbsp&nbsp</a>
+        <% if current_user.tribe %>
+          <a href="/tribes/<%= current_user.tribe.slug %>/manage">&nbsp&nbsp<%= current_user.tribe.name %>&nbsp&nbsp</a>
+          <a href="/messengers/<%= current_user.tribe.slug %>">&nbsp&nbspMessengers&nbsp&nbsp</a>
+        <% else %>
+          <a href="tribes/new">&nbsp&nbspCreate a tribe&nbsp&nbsp</a>
+        <% end %>
         <a href="/logout">&nbsp&nbspLog out</a>
       <% else %>
-        <a href="/signup">Sign up</a>
-        <a href="/login">Log in</a>
+        <a href="/signup">Sign up&nbsp&nbsp</a>
+        <a href="/login">&nbsp&nbspLog in</a>
       <% end %>
     </nav>
   </header>
