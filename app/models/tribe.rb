@@ -32,7 +32,8 @@ class Tribe < ActiveRecord::Base
       "iron": 3,
       "food": 3,
       "coal": 5,
-      "stone": 7
+      "stone": 7,
+      "wood": 4
     }
   }
 
