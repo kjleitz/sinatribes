@@ -13,11 +13,11 @@
     <div id="logo"><a href="/">SinaTribes</a></div>
     <nav id="main_nav">
       <% if session[:user_id] %>
-        <a href="/">Home</a>
-        <a href="/tribes">World</a>
-        <a href="/tribes/<%= current_user.tribe.slug %>/manage"><%= current_user.tribe.name %></a>
-        <a href="/messengers/<%= current_user.tribe.slug %>">Messengers</a>
-        <a href="/logout">Log out</a>
+        <a href="/">Home&nbsp&nbsp</a>
+        <a href="/tribes">&nbsp&nbspWorld&nbsp&nbsp</a>
+        <a href="/tribes/<%= current_user.tribe.slug %>/manage">&nbsp&nbsp<%= current_user.tribe.name %>&nbsp&nbsp</a>
+        <a href="/messengers/<%= current_user.tribe.slug %>">&nbsp&nbspMessengers&nbsp&nbsp</a>
+        <a href="/logout">&nbsp&nbspLog out</a>
       <% else %>
         <a href="/signup">Sign up</a>
         <a href="/login">Log in</a>
