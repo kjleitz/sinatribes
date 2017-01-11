@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, "public"
     set :views, "app/views"
     enable :sessions
-    set :session_secret, "after all these implements and texts designed by intellects"
+    set :session_secret, ENV["SECRET"]
     use Rack::Flash
     set(:logged_in) { |bool| condition { logged_in? == bool } }
     set(:current_user_tribe) do |bool|

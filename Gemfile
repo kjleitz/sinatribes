@@ -7,14 +7,13 @@ source 'http://rubygems.org' do
   gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
   gem 'rake'
   gem 'require_all'
-  gem 'sqlite3'
+  gem 'pg'
   gem 'thin'
   gem 'shotgun'
   gem 'pry'
   gem 'bcrypt'
   gem 'tux'
   gem 'rack-flash3', :require => 'rack-flash'
-  gem 'learn-co'
 
   group :test do
     gem 'rspec'
