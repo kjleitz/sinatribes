@@ -2,13 +2,20 @@
 
 <% if @user.tribes %>
   <table>
-    <tcaption>Tribes:</tcaption>
-    <% @user.tribes.each do |tribe| %>
+    <thead>
       <tr>
-        <td><a href="/tribes/<%= tribe.slug %>"><%= tribe.name %></a></td>
-        <td><a href="/messengers/new/<%= tribe.id %>">Run a messenger</a></td>
+        <th>Tribe</th>
+        <th>Diplomacy</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @user.tribes.each do |tribe| %>
+        <tr>
+          <td><a href="/tribes/<%= tribe.slug %>"><%= tribe.name %></a></td>
+          <td><a href="/messengers/new/<%= tribe.id %>">Run a messenger</a></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 <% else %>
   <p>This user doesn't own any tribes. What a <em>loser!</em></p>
