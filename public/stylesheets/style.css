@@ -69,6 +69,21 @@ a:hover {
   color: #777;
 }
 
+input[type="number"], input[type="text"] {
+  border: 1px solid #4a4a48;
+}
+
+input[type="submit"] {
+  border: 1px solid #4a4a48;
+  background-color: #f1f2eb;
+  border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: white;
+}
+
 strong {
   font-weight: 500;
 }
