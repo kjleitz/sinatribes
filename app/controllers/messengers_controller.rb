@@ -7,7 +7,7 @@ class MessengersController < ApplicationController
           erb :"messengers/new"
         else
           flash[:message] = "This is your tribe. You can't send a messenger to your own tribe, silly!"
-          redirect to("/tribes/#{tribe.slug}")
+          redirect to("/tribes/#{@tribe.slug}")
         end
       else
         flash[:message] = "You need to set an <strong>active tribe</strong> before you can send a messenger to another tribe."
