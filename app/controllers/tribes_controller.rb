@@ -125,7 +125,7 @@ class TribesController < ApplicationController
       end
       redirect to("/tribes/#{slug}")
     else
-      flash[:message] = "You need to set an <strong>active tribe</strong> before you can send a messenger to another tribe."
+      flash[:message] = "You need to set an <strong>active tribe</strong> before you can raid another tribe."
       redirect to("/")
     end
   end
