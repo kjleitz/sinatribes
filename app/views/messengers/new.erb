@@ -8,7 +8,13 @@
   <input type="hidden" name="destination_id" value="<%= @destination.id %>">
 
   <p><label for="message"><em>Have the messenger relay a message:</em></label></p>
-  <p><textarea name="message" id="msg_box" cols="50" rows="5">What's happenin', <%= @destination.name %>?</textarea></p>
+  <table>
+    <tr>
+      <td>
+        <textarea name="message" id="msg_box" cols="50" rows="5">What's happenin', <%= @destination.name %>?</textarea>
+      </td>
+    </tr>
+  </table>
 
   <table id="gift_table">
     <tcaption><em>Have the messenger carry a gift:</em></tcaption>
