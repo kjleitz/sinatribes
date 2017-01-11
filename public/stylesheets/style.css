@@ -3,7 +3,7 @@ body {
   font-weight: 300;
   max-width: 50em;
   margin: 5em auto 5em auto;
-  background-color: #e0e0e0;
+  background-color: #d8dad3;
 }
 
 #top_bar {
@@ -12,18 +12,18 @@ body {
   left: 0;
   right: 0;
   padding: 0.5em;
-  background-color: #777;
+  background-color: #4a4a48;
   border-bottom: 1px solid black;
   z-index: 10;
 }
 
 #top_bar a {
-  color: #e0e0e0;
+  color: #d8dad3;
   text-shadow: 0 0 3px #333;
 }
 
 #top_bar a:hover {
-  color: #bbc
+  color: #b4cdb5
 }
 
 #logo {
@@ -34,6 +34,10 @@ body {
 
 #main_nav {
   float: right;
+}
+
+#main_nav a {
+  font-weight: 300;
 }
 
 main {
@@ -49,14 +53,20 @@ main {
   width: 50em;
   margin-left: auto;
   margin-right: auto;
-  background-color: #bbc;
-  border-left: 1px solid #777;
-  border-right: 1px solid #777;
+  background-color: #b4cdb5;
+  border-left: 1px solid #4a4a48;
+  border-right: 1px solid #4a4a48;
   z-index: -1;
 }
 
 a {
   text-decoration: none;
+  font-weight: 500;
+  color: #4a4a48;
+}
+
+a:hover {
+  color: #777;
 }
 
 strong {
@@ -69,7 +79,7 @@ h1, h2 {
 
 .flash {
   padding: 1em;
-  border: 2px solid #777;
+  border: 2px solid #4a4a48;
   background-color: #afc;
   border-radius: 5px;
 }
@@ -89,7 +99,7 @@ div.tables {
 table {
   max-width: 100%;
   margin: 1em;
-  border: 2px solid #777;
+  border: 2px solid #4a4a48;
   border-collapse: collapse;
   font-size: 0.9em;
 }
@@ -99,17 +109,17 @@ table {
 }
 
 th {
-  border: 1px solid #777;
+  border: 1px solid #4a4a48;
   padding: 0.5em;
-  background-color: #aaa;
+  background-color: #848c78;
   font-size: 0.8em;
   font-weight: 500;
 }
 
 td {
   padding: 0.5em;
-  background-color: #e0e0e0;
-  border: 1px solid #777;
+  background-color: #d8dad3;
+  border: 1px solid #4a4a48;
 }
 
 td.input_col {
