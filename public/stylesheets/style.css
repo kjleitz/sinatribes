@@ -19,6 +19,7 @@ body {
 
 #top_bar a {
   color: #e0e0e0;
+  text-shadow: 0 0 3px #333;
 }
 
 #top_bar a:hover {
@@ -33,10 +34,6 @@ body {
 
 #main_nav {
   float: right;
-}
-
-#main_nav a + a:before {
-  content: " | "
 }
 
 main {
