@@ -113,17 +113,21 @@ class TribesController < ApplicationController
   end
 
   patch "/tribes/:slug/raid", current_user_tribe: false do |slug|
-    attacker = current_user.tribe
     defender = Tribe.find_by_slug(slug)
-    case attacker.raid(defender)
-    when :win
-      flash[:message] = "You successfully raided #{defender.name}! Check your war messages (on the tribe management page) for more details."
-    when :draw
-      flash[:message] = "#{defender.name} was a SERIOUSLY tough opponent. You bounced off each other like a couple of flirts. Check your war messages (on the tribe management page) for more details."
-    when :loss
-      flash[:message] = "You win some, you lose some. But this time, you really lost some. Them's the breaks. You should look up the literal meaning of the word \"decimated\", and then check your war messages (on the tribe management page) for more details."
+    if attacker = current_user.tribe
+      case attacker.raid(defender)
+      when :win
+        flash[:message] = "You successfully raided #{defender.name}! Check your war messages (on the tribe management page) for more details."
+      when :draw
+        flash[:message] = "#{defender.name} was a SERIOUSLY tough opponent. You bounced off each other like a couple of flirts. Check your war messages (on the tribe management page) for more details."
+      when :loss
+        flash[:message] = "You win some, you lose some. But this time, you really lost some. Them's the breaks. You should look up the literal meaning of the word \"decimated\", and then check your war messages (on the tribe management page) for more details."
+      end
+      redirect to("/tribes/#{slug}")
+    else
+      flash[:message] = "You need to set an <strong>active tribe</strong> before you can send a messenger to another tribe."
+      redirect to("/")
     end
-    redirect to("/tribes/#{slug}")
   end
 
   delete "/tribes/:slug/delete", current_user_tribe: true do |slug|
