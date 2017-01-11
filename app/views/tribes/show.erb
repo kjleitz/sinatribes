@@ -4,6 +4,9 @@
   <p><a href="/tribes/<%= @tribe.slug %>/manage">Manage</a> your tribe.</p>
   <p>View your tribe's <a href="/messengers/<%= @tribe.slug %>">messenger activity</a>.</p>
 <% else %>
+
+  <h2><em><a href="/users/<%= @tribe.user.username %>"><%= @tribe.user.username %></a>'s tribe</em></h2>
+
   <p>Run a <a href="/messengers/new/<%= @tribe.id %>">messenger</a> to this tribe!</p>
   <p>
     <form action="/tribes/<%= @tribe.slug %>/raid" method="post">
