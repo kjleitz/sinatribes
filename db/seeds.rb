@@ -8,8 +8,8 @@ billiam = User.create(
   email: "bill@bill.com",
   password: "password1"
 )
-sarah = User.create(
-  username: "sarah",
+egg_nog = User.create(
+  username: "egg_nog",
   email: "me@timsister.com",
   password: "weddingslol"
 )
@@ -58,7 +58,7 @@ scalpers = Tribe.create(
 nerds = Tribe.create(
   name: "Aquarium Nerds",
   technology: 100,
-  user: sarah,
+  user: egg_nog,
   religion: paganism
 )
 dwarves = Tribe.create(
@@ -73,7 +73,7 @@ survivors = Tribe.create(
 citizens = Tribe.create(
   name: "Non-Pirate 'Pirate Island' Citizens",
   land: 15,
-  user: sarah,
+  user: egg_nog,
   religion: satanism,
   population: Population.create(
     warriors: 125,
