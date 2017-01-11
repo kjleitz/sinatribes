@@ -58,7 +58,9 @@ class Tribe < ActiveRecord::Base
 
   def give_stimulus_package
     add_money(STIMULUS_PACKAGE[:money])
-    STIMULUS_PACKAGE[:resources].each { |res_name| add_resource(res_name) }
+    STIMULUS_PACKAGE[:resources].each do |res_name, res_count|
+      res_count.times { add_resource(res_name) }
+    end
   end
 
   def warriors
