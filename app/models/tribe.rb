@@ -115,7 +115,7 @@ class Tribe < ActiveRecord::Base
 
   def buy_land(amt)
     if lose_money(amt * LAND_PRICE)
-      rand(amt).times { collect_resource(Resource.discover) }
+      (rand(amt + 5) / 5).times { collect_resource(Resource.discover) }
       add_land(amt)
     else
       false
