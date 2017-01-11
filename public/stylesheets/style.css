@@ -32,6 +32,12 @@ h1, h2 {
   font-weight: 500;
 }
 
+.flash {
+  padding: 1em;
+  border: 2px solid #777;
+  background-color: #afc;
+}
+
 div.tables {
   position: absolute;
   left: 0;
