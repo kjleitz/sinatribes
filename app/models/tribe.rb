@@ -20,11 +20,21 @@ class Tribe < ActiveRecord::Base
   after_create :initialize_tax_time
   after_create :make_active_tribe
   after_create :initialize_war_messages
+  after_create :give_stimulus_package
 
   TAX_WAIT_PERIOD = 300
   LAND_PRICE = 100
   WARRIOR_PRICE = 50
   FARMERS_PER_HUT = 10
+  STIMULUS_PACKAGE = {
+    money: 9000,
+    resources: {
+      "iron": 3,
+      "food": 3,
+      "coal": 5,
+      "stone": 7
+    }
+  }
 
   def initialize(args)
     super
@@ -44,6 +54,11 @@ class Tribe < ActiveRecord::Base
 
   def initialize_war_messages
     self.update(war_messages: [])
+  end
+
+  def give_stimulus_package
+    add_money(STIMULUS_PACKAGE[:money])
+    STIMULUS_PACKAGE[:resources].each { |res_name| add_resource(res_name) }
   end
 
   def warriors
