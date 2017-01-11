@@ -19,7 +19,7 @@ body {
 
 #top_bar a {
   color: #d8dad3;
-  text-shadow: 0 0 3px #333;
+  text-shadow: 0 0 3px black;
 }
 
 #top_bar a:hover {
@@ -66,7 +66,7 @@ a {
 }
 
 a:hover {
-  color: #999;
+  color: #958383;
 }
 
 input[type="number"], input[type="text"], input[type="email"], input[type="password"] {
@@ -106,7 +106,7 @@ h1, h2 {
 .flash {
   padding: 1em;
   border: 2px solid #4a4a48;
-  background-color: #afc;
+  background-color: #ccb3b3;
   border-radius: 5px;
 }
 
