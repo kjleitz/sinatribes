@@ -14,6 +14,7 @@ source 'http://rubygems.org' do
   gem 'bcrypt'
   gem 'tux'
   gem 'rack-flash3', :require => 'rack-flash'
+  gem 'puma'
 
   group :test do
     gem 'rspec'

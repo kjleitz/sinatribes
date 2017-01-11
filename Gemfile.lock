@@ -44,6 +44,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (2.0.5)
+    puma (3.6.0)
     rack (1.6.5)
     rack-flash3 (1.0.5)
       rack
@@ -109,6 +110,7 @@ DEPENDENCIES
   capybara!
   pg!
   pry!
+  puma!
   rack-flash3!
   rack-test!
   rake!
