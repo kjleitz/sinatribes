@@ -23,7 +23,7 @@ body {
 }
 
 #top_bar a:hover {
-  color: #b4cdb5
+  color: white;
 }
 
 #logo {
@@ -66,7 +66,7 @@ a {
 }
 
 a:hover {
-  color: #777;
+  color: #999;
 }
 
 input[type="number"], input[type="text"] {
@@ -83,6 +83,8 @@ input[type="submit"]:hover {
   cursor: pointer;
   background-color: white;
 }
+
+
 
 strong {
   font-weight: 500;
