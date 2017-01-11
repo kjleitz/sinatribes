@@ -90,6 +90,12 @@ select {
   border-radius: 5px;
 }
 
+textarea {
+  border: 1px solid #4a4a48;
+  background-color: white;
+  /*border-radius: 5px;*/
+}
+
 strong {
   font-weight: 500;
 }
