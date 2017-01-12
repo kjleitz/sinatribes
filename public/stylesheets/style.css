@@ -177,23 +177,7 @@ input[type="number"] {
   position: fixed;
   top: 5em;
   right: 0;
-  /*margin: 00;*/
-  /*border: 1px solid blue;*/
 }
-
-/*#money {
-  display: flex;
-  justify-content: flex-end;
-  border: 1px solid red;
-  position: fixed;
-  top: 5em;
-  right: 0;
-  margin: 0 0.5em 0 0;
-}
-
-#finances {
-  margin: 0;
-}*/
 
 #finances {
   margin: 0.5em;
@@ -202,23 +186,18 @@ input[type="number"] {
 #possessions {
   display: flex;
   justify-content: flex-end;
-  /*border: 1px solid red;*/
   margin: 0.5em;
 }
 
-
-
 #resources {
-  /*border: 3px solid green;*/
   margin: 0 0.5em 0 0;
 }
 
 #infrastructure {
-  /*border: 3px solid green;*/
   margin: 0;
 }
 
-#finances td, #resources td {
+#sidebar td {
   background-color: white;
 }
 
