@@ -168,3 +168,24 @@ td:first-child {
 input[type="number"] {
   width: 4em;
 }
+
+#finances {
+  position: fixed;
+  top: 5em;
+  right: 0;
+}
+
+#resources {
+  position: fixed;
+  top: 13em;
+  right: 0;
+}
+
+#finances td, #resources td {
+  background-color: white;
+}
+
+td form {
+  display: inline-block;
+  float: right;
+}
