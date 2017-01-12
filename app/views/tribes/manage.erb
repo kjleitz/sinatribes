@@ -42,7 +42,9 @@
         </tr>
       </tbody>
     </table>
+  </section>
 
+  <aside id="sidebar">
     <table id="finances">
       <thead>
         <tr>
@@ -69,7 +71,81 @@
         </tr>
       </tbody>
     </table>
-  </section>
+
+    <section id="possessions">
+      <table id="resources">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Resources</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @tribe.resources.empty? %>
+            <tr>
+              <td></td>
+              <td><em>You have no resources.</em></td>
+            </tr>
+          <% else %>
+            <% @tribe.list_resources.each do |resource_name| %>
+              <tr>
+                <td><%= @tribe.count_resource(resource_name) %></td>
+                <td><%= resource_name.capitalize %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+
+      <table id="infrastructure">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Infrastructure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @tribe.buildings.empty? %>
+            <tr>
+              <td></td>
+              <td><em>You have no buildings.</em></td>
+              <td class="input_col"></td>
+            </tr>
+          <% else %>
+            <% @tribe.buildings.uniq.each do |building| %>
+              <tr>
+                <td><%= @tribe.count_building(building.name) %></td>
+                <td><%= building.name %>
+                  <% if building.usable? %>
+                    <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
+                      <input type="hidden" name="_method" value="patch">
+                      <input type="hidden" name="building_name" value="<%= building.name %>">
+                      <input type="submit" value="<%= building.action.capitalize %>">
+                    </form>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td class="input_col">
+              <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
+                <select name="building_name">
+                  <% @buildings.each do |building| %>
+                  <option value="<%= building.name %>"><%= building.name.capitalize %>: $<%= building.price %> + <%= building.resource_amount %> <%= building.resource_name %></option>
+                  <% end %>
+                </select>
+                <input type="submit" value="Buy">
+              </form>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+  </aside>
 
   <section class="container">
     <table id="census">
@@ -136,78 +212,6 @@
           <td class="input_col"></td>
         </tr>
       </tbody>
-    </table>
-
-    <table id="resources">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Resources</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @tribe.resources.empty? %>
-          <tr>
-            <td></td>
-            <td><em>You have no resources.</em></td>
-          </tr>
-        <% else %>
-          <% @tribe.list_resources.each do |resource_name| %>
-            <tr>
-              <td><%= @tribe.count_resource(resource_name) %></td>
-              <td><%= resource_name.capitalize %></td>
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
-
-    <table id="infrastructure">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Infrastructure</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @tribe.buildings.empty? %>
-          <tr>
-            <td></td>
-            <td><em>You have no buildings.</em></td>
-            <td class="input_col"></td>
-          </tr>
-        <% else %>
-          <% @tribe.buildings.uniq.each do |building| %>
-            <tr>
-              <td><%= @tribe.count_building(building.name) %></td>
-              <td><%= building.name %>
-                <% if building.usable? %>
-                  <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
-                    <input type="hidden" name="_method" value="patch">
-                    <input type="hidden" name="building_name" value="<%= building.name %>">
-                    <input type="submit" value="<%= building.action.capitalize %>">
-                  </form>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td></td>
-          <td class="input_col">
-            <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
-              <select name="building_name">
-                <% @buildings.each do |building| %>
-                <option value="<%= building.name %>"><%= building.name.capitalize %>: $<%= building.price %> + <%= building.resource_amount %> <%= building.resource_name %></option>
-                <% end %>
-              </select>
-              <input type="submit" value="Buy">
-            </form>
-          </td>
-        </tr>
-      </tfoot>
     </table>
   </section>
 
