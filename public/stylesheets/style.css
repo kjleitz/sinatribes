@@ -116,12 +116,6 @@ div.tables {
   right: 0;
 }
 
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
 table {
   max-width: 100%;
   margin: 1em;
@@ -167,6 +161,18 @@ td:first-child {
 
 input[type="number"] {
   width: 4em;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#main-tables {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 #sidebar {

@@ -3,7 +3,7 @@
 <p>View your tribe's <a href="/messengers/<%= @tribe.slug %>">messenger activity</a>.</p>
 
 <div class="tables">
-  <section class="container">
+  <section id="main-tables">
     <table id="general">
       <thead>
         <tr>
@@ -38,6 +38,72 @@
         <tr>
           <td>Technology:</td>
           <td><%= @tribe.technology %></td>
+          <td class="input_col"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table id="census">
+      <thead>
+        <tr>
+          <th>Census</th>
+          <th>Value</th>
+          <th>Interaction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Total population:</td>
+          <td><%= @tribe.population.total %></td>
+          <td class="input_col"></td>
+        </tr>
+        <tr>
+          <td>Population density:</td>
+          <td><%= @tribe.population.density %>/mi<sup>2</sup></td>
+          <td class="input_col"></td>
+        </tr>
+        <tr>
+          <td>Warriors:</td>
+          <td><%= @tribe.warriors %></td>
+          <td class="input_col">
+            <% if @tribe.has_building?("barracks") %>
+              <form action="/tribes/<%= @tribe.slug %>/warriors" method="post">
+                <input type="hidden" name="_method" value="patch">
+                <input type="number" name="amount">
+                <input type="submit" value="Enlist warriors">
+                <br><em>($<%= @warrior_price %> per warrior)</em>
+              </form>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>Farmers:</td>
+          <td><%= @tribe.farmers %></td>
+          <td class="input_col">
+            <form action="/tribes/<%= @tribe.slug %>/farmers" method="post">
+              <input type="hidden" name="_method" value="patch">
+              <input type="number" name="amount">
+              <input type="submit" value="Invite farmers">
+              <br><em>(1 hut needed per 10 farmers)</em>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Priests:</td>
+          <td><%= @tribe.priests %></td>
+          <td class="input_col">
+            <% if @tribe.has_building?("temple") %>
+              <form action="/tribes/<%= @tribe.slug %>/priests" method="post">
+                <input type="hidden" name="_method" value="patch">
+                <input type="submit" value="Ordain a priest">
+                <br><em>(1 cloth per priest)</em>
+              </form>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>Happiness:</td>
+          <td><%= @tribe.happiness %></td>
           <td class="input_col"></td>
         </tr>
       </tbody>
@@ -146,74 +212,6 @@
       </table>
     </section>
   </aside>
-
-  <section class="container">
-    <table id="census">
-      <thead>
-        <tr>
-          <th>Census</th>
-          <th>Value</th>
-          <th>Interaction</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Total population:</td>
-          <td><%= @tribe.population.total %></td>
-          <td class="input_col"></td>
-        </tr>
-        <tr>
-          <td>Population density:</td>
-          <td><%= @tribe.population.density %>/mi<sup>2</sup></td>
-          <td class="input_col"></td>
-        </tr>
-        <tr>
-          <td>Warriors:</td>
-          <td><%= @tribe.warriors %></td>
-          <td class="input_col">
-            <% if @tribe.has_building?("barracks") %>
-              <form action="/tribes/<%= @tribe.slug %>/warriors" method="post">
-                <input type="hidden" name="_method" value="patch">
-                <input type="number" name="amount">
-                <input type="submit" value="Enlist warriors">
-                <br><em>($<%= @warrior_price %> per warrior)</em>
-              </form>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>Farmers:</td>
-          <td><%= @tribe.farmers %></td>
-          <td class="input_col">
-            <form action="/tribes/<%= @tribe.slug %>/farmers" method="post">
-              <input type="hidden" name="_method" value="patch">
-              <input type="number" name="amount">
-              <input type="submit" value="Invite farmers">
-              <br><em>(1 hut needed per 10 farmers)</em>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td>Priests:</td>
-          <td><%= @tribe.priests %></td>
-          <td class="input_col">
-            <% if @tribe.has_building?("temple") %>
-              <form action="/tribes/<%= @tribe.slug %>/priests" method="post">
-                <input type="hidden" name="_method" value="patch">
-                <input type="submit" value="Ordain a priest">
-                <br><em>(1 cloth per priest)</em>
-              </form>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>Happiness:</td>
-          <td><%= @tribe.happiness %></td>
-          <td class="input_col"></td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
 
   <section class="container">
     <table id="military">
