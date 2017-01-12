@@ -167,7 +167,6 @@
         <tr>
           <th>#</th>
           <th>Infrastructure</th>
-          <th>Interaction</th>
         </tr>
       </thead>
       <tbody>
@@ -181,24 +180,22 @@
           <% @tribe.buildings.uniq.each do |building| %>
             <tr>
               <td><%= @tribe.count_building(building.name) %></td>
-              <td><%= building.name %></td>
-              <td class="input_col">
+              <td><%= building.name %>
                 <% if building.usable? %>
                   <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
                     <input type="hidden" name="_method" value="patch">
                     <input type="hidden" name="building_name" value="<%= building.name %>">
                     <input type="submit" value="<%= building.action.capitalize %>">
                   </form>
-                </td>
-              </tr>
-            <% end %>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
         <% end %>
       </tbody>
       <tfoot>
         <tr>
           <td></td>
-          <td>[new building]</td>
           <td class="input_col">
             <form action="/tribes/<%= @tribe.slug %>/buildings" method="post">
               <select name="building_name">
