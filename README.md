@@ -118,6 +118,7 @@ You can see how other users see your tribe by going to your tribe's public-facin
 
 You can see other tribes by clicking their name wherever there is a link on it (the World page, their user page, your messenger activity page, etc.).
 
+<a name="installation"></a>
 ## Installation
 
 If you want to install the game and try to host it on your own, clone this repository:
