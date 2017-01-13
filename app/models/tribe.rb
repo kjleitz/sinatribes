@@ -250,8 +250,9 @@ class Tribe < ActiveRecord::Base
   def use_building(building_name)
     resource_name = ""
     results = []
+    building = self.buildings.find_by(name: building_name)
 
-    if building = self.buildings.find_by(name: building_name) && !building.waiting?
+    if building && !building.waiting?
       count_building(building_name).times do
         resource = building.use
         collect_resource(resource)
