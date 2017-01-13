@@ -23,6 +23,10 @@ class Resource < ActiveRecord::Base
     "coal"
   ]
 
+  CHOPPABLES = [
+    "wood"
+  ]
+
   def self.discover
     self.create(name: DISCOVERABLES.sample)
   end
@@ -37,6 +41,10 @@ class Resource < ActiveRecord::Base
 
   def self.manufacture
     self.create(name: MANUFACTURABLES.sample)
+  end
+
+  def self.chop
+    self.create(name: CHOPPABLES.sample)
   end
 
 end
