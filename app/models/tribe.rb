@@ -249,13 +249,20 @@ class Tribe < ActiveRecord::Base
 
   def use_building(building_name)
     resource_name = ""
-    amt = count_building(building_name).times do
-      if resource = self.buildings.find_by(name: building_name).use
+    results = []
+
+    if building = self.buildings.find_by(name: building_name) && !building.waiting?
+      count_building(building_name).times do
+        resource = building.use
         collect_resource(resource)
-        resource_name = resource.name
+        results << resource.name
       end
     end
-    [amt, resource_name]
+
+    results.inject({}) do |memo, res_name|
+      memo[res_name] = results.count(res_name)
+      memo
+    end
   end
 
   def strength
