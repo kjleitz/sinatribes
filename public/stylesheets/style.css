@@ -269,4 +269,20 @@ td form {
 
 @media screen and (max-width: 800px) {
 
+  #top_bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5em 1em;
+    background-color: #4a4a48;
+    border-bottom: 1px solid black;
+    z-index: 10;
+  }
+
+  #main_nav {
+    clear: both;
+    float: none;
+  }
+
 }
