@@ -9,7 +9,8 @@ class Building < ActiveRecord::Base
   ACTIONS = {
     "factory" => "manufacture",
     "farm" => "harvest",
-    "mine" => "mine"
+    "mine" => "mine",
+    "lumber yard" => "chop"
   }
 
   def initialize_action
