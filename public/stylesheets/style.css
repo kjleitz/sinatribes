@@ -109,6 +109,12 @@ h1, h2 {
   border-radius: 5px;
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 div.tables {
   position: absolute;
   left: 0;
@@ -213,4 +219,54 @@ td form {
   display: inline-block;
   float: right;
   font-size: 0.8em;
+}
+
+@media screen and (max-width: 1000px) {
+
+  #background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #b4cdb5;
+    border-left: 4px solid #848c78;
+    border-right: 4px solid #848c78;
+    z-index: -1;
+  }
+
+  .manage {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  #main-tables {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  #sidebar {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  #military {
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  #sidebar td, #main-tables td {
+    background-color: #d8dad3;
+  }
+
+}
+
+@media screen and (max-width: 800px) {
+
 }
