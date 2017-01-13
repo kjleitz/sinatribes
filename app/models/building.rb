@@ -5,7 +5,7 @@ class Building < ActiveRecord::Base
   after_create :initialize_action
   after_create :initialize_used_time
 
-  BUILDING_WAIT_PERIOD = 0
+  BUILDING_WAIT_PERIOD = 10
   ACTIONS = {
     "factory" => "manufacture",
     "farm" => "harvest",
