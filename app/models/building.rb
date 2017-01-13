@@ -20,12 +20,16 @@ class Building < ActiveRecord::Base
     self.update(last_used: Time.now - BUILDING_WAIT_PERIOD) unless self.last_used
   end
 
+  def waiting?
+    Time.now - self.last_used < BUILDING_WAIT_PERIOD
+  end
+
   def usable?
     !!self.action
   end
 
   def use
-    if self.usable? && (Time.now - self.last_used) > BUILDING_WAIT_PERIOD
+    if self.usable?
       self.update(last_used: Time.now)
       Resource.send(self.action)
     end
