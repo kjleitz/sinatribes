@@ -24,15 +24,16 @@ deadpool = User.create(
   password: "fourthwall"
 )
 
-christianity = Religion.create(
-name: "Christianity"
-)
-paganism = Religion.create(
-name: "Paganism"
-)
-satanism = Religion.create(
-name: "Satanism"
-)
+christianity = Religion.create(name: "Christianity")
+paganism = Religion.create(name: "Paganism")
+satanism = Religion.create(name: "Satanism")
+buddhism = Religion.create(name: "Buddhism")
+judaism = Religion.create(name: "Judaism")
+islam = Religion.create(name: "Islam")
+hinduism = Religion.create(name: "Hinduism")
+animism = Religion.create(name: "Animism")
+secularism = Religion.create(name: "Secularism")
+arbitraryism = Religion.create(name: "Arbitrary *-ism")
 
 queens = Tribe.create(
   name: "The Queen's Personal Foot-Lickers",
@@ -150,6 +151,13 @@ temple = Building.create(
   price: 750,
   resource_amount: 5,
   resource_name: "stone"
+)
+
+lumber_yard = Building.create(
+  name: "lumber yard",
+  price: 750,
+  resource_amount: 2,
+  resource_name: "iron"
 )
 
 survivors.build_building("hut")
