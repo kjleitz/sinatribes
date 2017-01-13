@@ -2,6 +2,12 @@
 
 ## A tribe-building simulation game!
 
+---
+
+[toc]
+
+---
+
 Have you ever wanted to create (and grow) a tribe of "human beings"?
 
 Have you ever wanted to crudely manage the collective lives of a small group of "arguably real" "people" with "state of the art" tables, buttons, and input fields?
