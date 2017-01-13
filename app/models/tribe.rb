@@ -253,7 +253,13 @@ class Tribe < ActiveRecord::Base
     building = self.buildings.find_by(name: building_name)
 
     if building && !building.waiting?
-      count_building(building_name).times do
+      count = count_building(building_name)
+      if building.name == "farm"
+        farmers_per_farm = self.farmers / count
+        farmer_multiplier = farmers_per_farm / 10
+        count *= farmer_multiplier
+      end
+      count.times do
         resource = building.use
         collect_resource(resource)
         results << resource.name
