@@ -143,7 +143,7 @@ ActiveRecord::Base.establish_connection(
 right below the line that says:
 
 ```ruby
-Bundler.require(:default, ENV['SINATRA_ENV'])`
+Bundler.require(:default, ENV['SINATRA_ENV'])
 ```
 
 Then, delete `config/database.yml` and `config/puma.rb`, and you should be able to run it locally with `rackup`.
