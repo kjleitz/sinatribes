@@ -258,12 +258,15 @@ class Tribe < ActiveRecord::Base
         collect_resource(resource)
         results << resource.name
       end
+
+      results.inject({}) do |memo, res_name|
+        memo[res_name] = results.count(res_name)
+        memo
+      end
+    else
+      nil
     end
 
-    results.inject({}) do |memo, res_name|
-      memo[res_name] = results.count(res_name)
-      memo
-    end
   end
 
   def strength
