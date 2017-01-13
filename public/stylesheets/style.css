@@ -42,7 +42,6 @@ body {
 
 main {
   height: 100%;
-  margin: 0;
   padding: 1.5em;
 }
 
@@ -124,10 +123,6 @@ table {
   font-size: 0.9em;
 }
 
-.container table {
-  max-width: 50%;
-}
-
 th {
   border: 1px solid #4a4a48;
   padding: 0.5em;
@@ -163,16 +158,23 @@ input[type="number"] {
   width: 4em;
 }
 
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+.manage {
+  width: 60%;
+  margin: 0 auto;
+}
+
+#military {
+  margin: 0 auto;
+  width: 33%;
 }
 
 #main-tables {
+  position: fixed;
+  top: 5em;
+  left: 0;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 #sidebar {
@@ -203,11 +205,12 @@ input[type="number"] {
   margin: 0;
 }
 
-#sidebar td {
+#sidebar td, #main-tables td {
   background-color: white;
 }
 
 td form {
   display: inline-block;
   float: right;
+  font-size: 0.8em;
 }
