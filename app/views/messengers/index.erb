@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @received_messengers.each do |messenger| %>
+      <% @received_messengers.reverse.each do |messenger| %>
         <tr>
           <td class="no_wrap"><%= messenger.created_at_formatted %></td>
           <td><a href="/tribes/<%= messenger.tribe.slug %>"><%= messenger.tribe.name %></a></td>
@@ -80,7 +80,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @sent_messengers.each do |messenger| %>
+      <% @sent_messengers.reverse.each do |messenger| %>
         <tr>
           <td class="no_wrap"><%= messenger.created_at_formatted %></td>
           <td><a href="/tribes/<%= messenger.destination.slug %>"><%= messenger.destination.name %></a></td>
