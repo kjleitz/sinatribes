@@ -19,44 +19,54 @@
     </thead>
     <tbody>
       <% @received_messengers.reverse.each do |messenger| %>
-        <tr>
-          <td class="no_wrap"><%= messenger.created_at_formatted %></td>
-          <td><a href="/tribes/<%= messenger.tribe.slug %>"><%= messenger.tribe.name %></a></td>
-          <td><%= messenger.message %><br><a href="/messengers/new/<%= messenger.tribe.id %>">[reply]</a></td>
-          <% gift = messenger.gift %>
-          <% if gift.money > 0 || gift.warriors > 0 || gift.resource %>
-            <td>
-              <%= "$#{gift.money}" if gift.money > 0 %>
-              <%= "|" if gift.money > 0 && (gift.warriors > 0 || gift.resource) %>
-              <%= "#{gift.warriors} warrior#{"s" if gift.warriors > 1}" if gift.warriors > 0 %>
-              <%= "|" if gift.warriors > 0 && gift.resource %>
-              <%= gift.resource.name.capitalize if gift.resource %>
-              <br>
-              <% if gift.accepted? %>
-                <strong>(gift accepted)</strong>
-              <% elsif !messenger.rejected? && !gift.claimed? %>
+        <% if messenger.tribe %>
+          <tr>
+            <td class="no_wrap"><%= messenger.created_at_formatted %></td>
+            <td><a href="/tribes/<%= messenger.tribe.slug %>"><%= messenger.tribe.name %></a></td>
+            <td><%= messenger.message %><br><a href="/messengers/new/<%= messenger.tribe.id %>">[reply]</a></td>
+            <% gift = messenger.gift %>
+            <% if gift.money > 0 || gift.warriors > 0 || gift.resource %>
+              <td>
+                <%= "$#{gift.money}" if gift.money > 0 %>
+                <%= "|" if gift.money > 0 && (gift.warriors > 0 || gift.resource) %>
+                <%= "#{gift.warriors} warrior#{"s" if gift.warriors > 1}" if gift.warriors > 0 %>
+                <%= "|" if gift.warriors > 0 && gift.resource %>
+                <%= gift.resource.name.capitalize if gift.resource %>
+                <br>
+                <% if gift.accepted? %>
+                  <strong>(gift accepted)</strong>
+                <% elsif !messenger.rejected? && !gift.claimed? %>
+                  <form action="/messengers/<%= @tribe.slug %>" method="post">
+                    <input type="hidden" name="_method" value="patch">
+                    <input type="hidden" name="accept_gift" value="<%= gift.id %>">
+                    <input type="submit" value="Accept gift">
+                  </form>
+                <% end %>
+              </td>
+            <% else %>
+              <td><em>This messenger did not bring a gift.</em></td>
+            <% end %>
+            <% if messenger.rejected? %>
+              <td><strong>(messenger rejected)</strong></td>
+            <% else %>
+              <td>
                 <form action="/messengers/<%= @tribe.slug %>" method="post">
                   <input type="hidden" name="_method" value="patch">
-                  <input type="hidden" name="accept_gift" value="<%= gift.id %>">
-                  <input type="submit" value="Accept gift">
+                  <input type="hidden" name="reject_messenger" value="<%= messenger.id %>">
+                  <input type="submit" value="Reject unwanted visitor">
                 </form>
-              <% end %>
-            </td>
-          <% else %>
-            <td><em>This messenger did not bring a gift.</em></td>
-          <% end %>
-          <% if messenger.rejected? %>
-            <td><strong>(messenger rejected)</strong></td>
-          <% else %>
-            <td>
-              <form action="/messengers/<%= @tribe.slug %>" method="post">
-                <input type="hidden" name="_method" value="patch">
-                <input type="hidden" name="reject_messenger" value="<%= messenger.id %>">
-                <input type="submit" value="Reject unwanted visitor">
-              </form>
-            </td>
-          <% end %>
-        </tr>
+              </td>
+            <% end %>
+          </tr>
+        <% else %>
+          <tr>
+            <td><em>This</em></td>
+            <td><em>tribe</em></td>
+            <td><em>has</em></td>
+            <td><em>been</em></td>
+            <td><em>DELETEEEEEEEEEEEEEED</em></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   <% end %>
@@ -81,43 +91,53 @@
     </thead>
     <tbody>
       <% @sent_messengers.reverse.each do |messenger| %>
-        <tr>
-          <td class="no_wrap"><%= messenger.created_at_formatted %></td>
-          <td><a href="/tribes/<%= messenger.destination.slug %>"><%= messenger.destination.name %></a></td>
-          <td><%= messenger.message %></td>
-          <% gift = messenger.gift %>
-          <% if gift.money > 0 || gift.warriors > 0 || gift.resource %>
-            <td>
-              <%= "$#{gift.money}" if gift.money > 0 %>
-              <%= "|" if gift.money > 0 && (gift.warriors > 0 || gift.resource) %>
-              <%= "#{gift.warriors} warrior#{"s" if gift.warriors > 1}" if gift.warriors > 0 %>
-              <%= "|" if gift.warriors > 0 && gift.resource %>
-              <%= gift.resource.name.capitalize if gift.resource %>
-              <br>
-              <% if gift.reclaimed? %>
-                <em>(you have reclaimed this gift)</em>
-              <% elsif gift.accepted? %>
-                <strong>(your gift has been <%= messenger.rejected? ? "rudely taken" : "accepted" %>)</strong>
-              <% elsif messenger.rejected? %>
-                <form action="/messengers/<%= @tribe.slug %>" method="post">
-                  <input type="hidden" name="_method" value="patch">
-                  <input type="hidden" name="reclaim_gift" value="<%= gift.id %>">
-                  <input type="submit" value="Reclaim gift">
-                </form>
-                (gift was not accepted)
-              <% else %>
-                (gift has yet to be accepted)
-              <% end %>
-            </td>
-          <% else %>
-            <td><em>You did not send this messenger with a gift.</em></td>
-          <% end %>
-          <% if messenger.rejected? %>
-            <td><strong>The receiving tribe rejected this messenger!</strong></td>
-          <% else %>
-            <td>Your messenger is welcome at his destination... for <em>now</em>.</td>
-          <% end %>
-        </tr>
+        <% if messenger.tribe %>
+          <tr>
+            <td class="no_wrap"><%= messenger.created_at_formatted %></td>
+            <td><a href="/tribes/<%= messenger.destination.slug %>"><%= messenger.destination.name %></a></td>
+            <td><%= messenger.message %></td>
+            <% gift = messenger.gift %>
+            <% if gift.money > 0 || gift.warriors > 0 || gift.resource %>
+              <td>
+                <%= "$#{gift.money}" if gift.money > 0 %>
+                <%= "|" if gift.money > 0 && (gift.warriors > 0 || gift.resource) %>
+                <%= "#{gift.warriors} warrior#{"s" if gift.warriors > 1}" if gift.warriors > 0 %>
+                <%= "|" if gift.warriors > 0 && gift.resource %>
+                <%= gift.resource.name.capitalize if gift.resource %>
+                <br>
+                <% if gift.reclaimed? %>
+                  <em>(you have reclaimed this gift)</em>
+                <% elsif gift.accepted? %>
+                  <strong>(your gift has been <%= messenger.rejected? ? "rudely taken" : "accepted" %>)</strong>
+                <% elsif messenger.rejected? %>
+                  <form action="/messengers/<%= @tribe.slug %>" method="post">
+                    <input type="hidden" name="_method" value="patch">
+                    <input type="hidden" name="reclaim_gift" value="<%= gift.id %>">
+                    <input type="submit" value="Reclaim gift">
+                  </form>
+                  (gift was not accepted)
+                <% else %>
+                  (gift has yet to be accepted)
+                <% end %>
+              </td>
+            <% else %>
+              <td><em>You did not send this messenger with a gift.</em></td>
+            <% end %>
+            <% if messenger.rejected? %>
+              <td><strong>The receiving tribe rejected this messenger!</strong></td>
+            <% else %>
+              <td>Your messenger is welcome at his destination... for <em>now</em>.</td>
+            <% end %>
+          </tr>
+        <% else %>
+          <tr>
+            <td><em>This</em></td>
+            <td><em>tribe</em></td>
+            <td><em>has</em></td>
+            <td><em>been</em></td>
+            <td><em>DELETEEEEEEEEEEEEEED</em></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   <% end %>
