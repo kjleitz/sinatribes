@@ -221,6 +221,20 @@ td form {
   font-size: 0.8em;
 }
 
+@media screen and (max-width: 1250px) {
+
+  .manage {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  #military {
+    margin: 0 auto;
+    width: 33%;
+  }
+
+}
+
 @media screen and (max-width: 1000px) {
 
   #background {
