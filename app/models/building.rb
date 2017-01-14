@@ -6,7 +6,7 @@ class Building < ActiveRecord::Base
   after_create :initialize_used_time
 
   # Remember for later: This is global. It affects all users after one building use.
-  BUILDING_WAIT_PERIOD = 30
+  BUILDING_WAIT_PERIOD = 60
   ACTIONS = {
     "factory" => "manufacture",
     "farm" => "harvest",

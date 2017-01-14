@@ -23,7 +23,7 @@ class Population < ActiveRecord::Base
     tax_val *= (1 + self.tribe.buildings.count * 0.25)
     tax_val += self.happiness
     tax_val *= self.tribe.technology
-    tax_val.to_i
+    (tax_val^0.75).to_i
   end
 
 end
