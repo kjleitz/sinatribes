@@ -27,6 +27,7 @@ class Tribe < ActiveRecord::Base
   WARRIOR_PRICE = 50
   FARMERS_PER_HUT = 10
   MAX_BUILDINGS = 50
+  MAX_RESOURCES = 100
   STIMULUS_PACKAGE = {
     money: 9000,
     resources: {
@@ -152,7 +153,7 @@ class Tribe < ActiveRecord::Base
 
   # For adding existing resources to self
   def collect_resource(resource)
-    resource.update(tribe: self, gift: nil)
+    resource.update(tribe: self, gift: nil) if count_resource(resource.name) < MAX_RESOURCES
   end
 
   # For creating a new resource and adding it to self
@@ -249,6 +250,10 @@ class Tribe < ActiveRecord::Base
     count_building(building_name) > 0
   end
 
+  # Warning: this method still CREATES resources despite not being able to
+  # transfer ownership to the tribe. Temporary garbage cleanup method will be
+  # on Resource. This is a begrudgingly-applied patch to users making too many
+  # resources for heroku to handle.
   def use_building(building_name)
     resource_name = ""
     results = []
