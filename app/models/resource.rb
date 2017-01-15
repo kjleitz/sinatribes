@@ -47,4 +47,12 @@ class Resource < ActiveRecord::Base
     self.create(name: CHOPPABLES.sample)
   end
 
+  def self.orphans
+    self.where(tribe: nil, gift: nil)
+  end
+
+  def self.clear_orphans
+    self.orphans.each {|orphan| orphan.destroy}
+  end
+
 end
