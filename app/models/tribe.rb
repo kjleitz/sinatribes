@@ -225,7 +225,8 @@ class Tribe < ActiveRecord::Base
   def build_building(building_name)
     if building = Building.find_by(name: building_name)
       if building.price <= self.money &&
-         building.resource_amount <= count_resource(building.resource_name)
+         building.resource_amount <= count_resource(building.resource_name) &&
+         count_building(building_name) < 100
         lose_money(building.price)
         building.resource_amount.times { lose_resource(building.resource_name) }
         self.tribe_buildings.create(building: building)
