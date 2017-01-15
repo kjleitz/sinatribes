@@ -26,6 +26,7 @@ class Tribe < ActiveRecord::Base
   LAND_PRICE = 100
   WARRIOR_PRICE = 50
   FARMERS_PER_HUT = 10
+  MAX_BUILDINGS = 50
   STIMULUS_PACKAGE = {
     money: 9000,
     resources: {
@@ -226,7 +227,7 @@ class Tribe < ActiveRecord::Base
     if building = Building.find_by(name: building_name)
       if building.price <= self.money &&
          building.resource_amount <= count_resource(building.resource_name) &&
-         count_building(building_name) < 100
+         count_building(building_name) < MAX_BUILDINGS
         lose_money(building.price)
         building.resource_amount.times { lose_resource(building.resource_name) }
         self.tribe_buildings.create(building: building)
