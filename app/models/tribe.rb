@@ -253,7 +253,8 @@ class Tribe < ActiveRecord::Base
   # Warning: this method still CREATES resources despite not being able to
   # transfer ownership to the tribe. Temporary garbage cleanup method will be
   # on Resource. This is a begrudgingly-applied patch to users making too many
-  # resources for heroku to handle.
+  # resources for heroku to handle. See orphaned resources with Resource.orphans
+  # and clear them with Resource.clear_orphans
   def use_building(building_name)
     resource_name = ""
     results = []
