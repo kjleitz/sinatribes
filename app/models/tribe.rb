@@ -242,6 +242,12 @@ class Tribe < ActiveRecord::Base
     end
   end
 
+  def lose_building(building_name)
+    if building = Building.find_by(name: building_name)
+      self.tribe_buildings.find_by(building: building).destroy
+    end
+  end
+
   def count_building(building_name)
     self.buildings.where(name: building_name).count
   end
