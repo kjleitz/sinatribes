@@ -11,24 +11,15 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    if !User.validate_username(params[:username])
-      flash[:message] = "Usernames may only contain letters, numbers, and underscores, and be less than 80 characters in length."
-    elsif !User.validate_email(params[:email])
-      flash[:message] = "Please enter a valid email address."
-    elsif User.find_by(username: params[:username])
-      flash[:message] = "Sorry, the username '#{params[:username]}' is taken. Please try something else."
-    elsif User.find_by(email: params[:email])
-      flash[:message] = "There's already an account using this email address. Would you like to <a href=\"/login\">log in</a> instead?"
-    elsif params[:password].empty?
-      flash[:message] = "Password cannot be blank."
-    elsif user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    user = User.new(params)
+    if user.save
       flash[:message] = "Successfully signed up!"
       session[:user_id] = user.id
+      redirect to '/'
     else
-      flash[:message] = "Something went wrong. Please try again."
+      flash[:message] = user.errors.full_messages
+      redirect to '/signup'
     end
-
-    redirect user ? to("/") : to("/signup")
   end
 
   get "/login" do
